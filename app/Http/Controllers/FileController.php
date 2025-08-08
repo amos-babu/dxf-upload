@@ -23,7 +23,7 @@ class FileController extends Controller
      */
     public function create()
     {
-        return Inertia::render("create");
+        return Inertia::render("files/create");
     }
 
     /**
@@ -50,7 +50,7 @@ class FileController extends Controller
 
         File::create($data);
 
-        return redirect("dashboard")->with("success","File Uploaded");
+        return to_route("dashboard");
     }
 
     /**
@@ -58,7 +58,7 @@ class FileController extends Controller
      */
     public function show(File $file)
     {
-        return Inertia::render("show",[
+        return Inertia::render("files/show",[
             "file" => $file,
         ]);
     }
@@ -68,7 +68,7 @@ class FileController extends Controller
      */
     public function edit(File $file)
     {
-        return Inertia::render("create");
+        return Inertia::render("files/update");
     }
 
     /**
@@ -95,7 +95,7 @@ class FileController extends Controller
 
         $file->update($data);
 
-        return redirect("dashboard")->with("success","File updated");
+        return to_route("dashboard");
     }
 
     /**
@@ -104,6 +104,6 @@ class FileController extends Controller
     public function destroy(File $file)
     {
         $file->delete();
-        return redirect("dashboard")->with("success","File deleted");
+        return to_route("dashboard");
     }
 }
