@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FileUploadRequest;
 use App\Models\File;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -29,14 +30,9 @@ class FileController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(FileUploadRequest $request)
     {
-        $data = $request->validate([
-            "name" => ["required", "max:50"],
-            "description" => ["nullable","max:255"],
-            "image" => ["required", "image"],
-            "dxf_file" => ["required", "file"]
-        ]);
+        $data = $request->validated();
 
         if ($request->hasFile("image")) {
             $filePath = $request->file("image")->store("images", "public");
@@ -44,7 +40,7 @@ class FileController extends Controller
         }
 
         if ($request->hasFile("dxf_file")) {
-            $filePath = $request->file("dxf_file")->store("dxf_files". "public");
+            $filePath = $request->file("dxf_file")->store("dxf_files", "public");
             $data["dxf_file"] = $filePath;
         }
 

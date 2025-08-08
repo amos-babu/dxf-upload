@@ -4,7 +4,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { BreadcrumbItem } from '@/types';
-import { router, useForm } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 import React from 'react';
 
 type CreateProps = {
@@ -24,8 +24,9 @@ export default function Create() {
 
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        router.post(route('files.store'), data);
+        post('/files');
     };
+    console.log(errors);
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Upload File',
