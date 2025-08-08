@@ -32,19 +32,19 @@ class FileController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            "name" => ["required", "max:10"],
-            "description" => ["nullable","max:50"],
+            "name" => ["required", "max:50"],
+            "description" => ["nullable","max:255"],
             "image" => ["required", "image"],
             "dxf_file" => ["required", "file"]
         ]);
 
         if ($request->hasFile("image")) {
-            $filePath = $request->file("image")->store("public", "images");
+            $filePath = $request->file("image")->store("images", "public");
             $data["image"] = $filePath;
         }
 
         if ($request->hasFile("dxf_file")) {
-            $filePath = $request->file("dxf_file")->store("public", "dxf_files");
+            $filePath = $request->file("dxf_file")->store("dxf_files". "public");
             $data["dxf_file"] = $filePath;
         }
 
@@ -84,12 +84,12 @@ class FileController extends Controller
         ]);
 
         if($request->hasFile("image")){
-            $filePath = $request->file("image")->store("public", "images");
+            $filePath = $request->file("image")->store("images", "public");
             $data["image"] = $filePath;
         }
 
         if($request->hasFile("dxf_file")){
-            $filePath = $request->file("dxf_file")->store("public", "dxf_files");
+            $filePath = $request->file("dxf_file")->store("dxf_files", "public");
             $data["dxf_file"] = $filePath;
         }
 
