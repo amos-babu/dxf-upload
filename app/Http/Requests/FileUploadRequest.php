@@ -22,10 +22,10 @@ class FileUploadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => ["required", "max:50"],
-            "description" => ["nullable","max:255"],
-            "image" => ["required", "image"],
-            "dxf_file" => ["required", "file"]
+            "name" => ["required","string", "max:50"],
+            "description" => ["nullable", "string", "max:255"],
+            "image" => ["required", "image", "mimes:jpg,jpeg,png", "max:2048"],
+            "dxf_file" => ["required", "file", "mimes:dxf", "max:2048"]
         ];
     }
 }

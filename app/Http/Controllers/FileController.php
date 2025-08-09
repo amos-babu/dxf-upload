@@ -14,8 +14,10 @@ class FileController extends Controller
      */
     public function index()
     {
+        $files = File::with("user")->latest()->paginate(10);
+        // dd($files);
         return Inertia::render("dashboard", [
-            "files" => File::latest()->paginate(10)
+            "files" => $files
         ]);
     }
 
@@ -33,6 +35,7 @@ class FileController extends Controller
     public function store(FileUploadRequest $request)
     {
         $data = $request->validated();
+        $data["user_id"] = auth()->id();
 
         if ($request->hasFile("image")) {
             $filePath = $request->file("image")->store("images", "public");

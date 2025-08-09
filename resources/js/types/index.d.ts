@@ -42,9 +42,9 @@ export interface User {
     [key: string]: unknown; // This allows for additional properties...
 }
 
-export interface CreateProps {
+type CreateProps = {
     name: string;
     description: string;
-    image: File;
-    dxf_file: File;
-}
+    image: File | null;
+    dxf_file: File | null;
+};
