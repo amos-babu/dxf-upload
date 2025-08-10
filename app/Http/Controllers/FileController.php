@@ -16,7 +16,8 @@ class FileController extends Controller
     {
         $files = File::all();
         return Inertia::render("dashboard", [
-            "files" => $files
+            // "files" => $files
+            "user" => auth()->user(),
         ]);
     }
 
@@ -33,6 +34,7 @@ class FileController extends Controller
      */
     public function store(FileUploadRequest $request)
     {
+
         $data = $request->validated();
         $data["user_id"] = auth()->id();
 
@@ -48,7 +50,7 @@ class FileController extends Controller
 
         File::create($data);
 
-        return to_route("dashboard");
+        return to_route("dashboard")->with('success', 'Uploaded successfully');
     }
 
     /**
