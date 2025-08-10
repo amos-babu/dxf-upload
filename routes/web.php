@@ -8,15 +8,16 @@ use Inertia\Inertia;
 //     return Inertia::render('welcome');
 // })->name('home');
 
-Route::get('/', function () {
-    return Inertia::render('dashboard');
-})->name('dashboard');
+// Route::get('/', function () {
+//     return Inertia::render('dashboard');
+// })->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('files', FileController::class)->except(["index", "show"]);
 });
 
-Route::resource('files', FileController::class)->only(["index", "show"]);
+Route::resource('files', FileController::class)->only(["show"]);
+Route::get('/', [FileController::class, 'index'])->name('files.index');
 
 Route::fallback(function () {
     return Inertia::render('notfound');

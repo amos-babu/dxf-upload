@@ -19,13 +19,14 @@ interface FlashProps {
     [key: string]: any;
 }
 
-export default function Dashboard() {
+export default function Dashboard({ word }:{ word: string}) {
     const { flash } = usePage<FlashProps>().props;
     const [successMessage, setSuccessMessage] = useState(flash.success);
 
-    console.log(flash);
+    console.log(word)
     if (successMessage) {
         toast.success(successMessage);
+        setSuccessMessage(undefined)
     }
     return (
         <AppLayout breadcrumbs={breadcrumbs}>

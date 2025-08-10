@@ -14,10 +14,9 @@ class FileController extends Controller
      */
     public function index()
     {
-        $files = File::all();
+        $files = File::with('user')->latest()->paginate(10);
         return Inertia::render("dashboard", [
-            // "files" => $files
-            "user" => auth()->user(),
+            "files" => $files
         ]);
     }
 
