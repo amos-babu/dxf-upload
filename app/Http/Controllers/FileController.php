@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FileUploadRequest;
+use App\Http\Resources\FileResource;
 use App\Models\File;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -14,9 +15,9 @@ class FileController extends Controller
      */
     public function index()
     {
-        $files = File::with('user')->latest()->paginate(10);
+        $files = File::select('id', 'name', 'image', 'dxf_file')->latest()->paginate(10);
         return Inertia::render("dashboard", [
-            "files" => $files
+            "files" => FileResource::collection($files),
         ]);
     }
 
@@ -49,7 +50,7 @@ class FileController extends Controller
 
         File::create($data);
 
-        return to_route("dashboard")->with('success', 'Uploaded successfully');
+        return to_route("files.index")->with('success', 'Uploaded successfully');
     }
 
     /**
@@ -94,7 +95,7 @@ class FileController extends Controller
 
         $file->update($data);
 
-        return to_route("dashboard");
+        return to_route("files.index");
     }
 
     /**
@@ -103,6 +104,6 @@ class FileController extends Controller
     public function destroy(File $file)
     {
         $file->delete();
-        return to_route("dashboard");
+        return to_route("files.index");
     }
 }
