@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 
@@ -13,13 +14,15 @@ test('confirm password screen can be rendered', function () {
 });
 
 test('password can be confirmed', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'password' => Hash::make('password'),
+    ]);
 
     $response = $this->actingAs($user)->post('/confirm-password', [
         'password' => 'password',
     ]);
 
-    $response->assertRedirect();
+    $response->assertRedirect(route('files.index', absolute: false));
     $response->assertSessionHasNoErrors();
 });
 
