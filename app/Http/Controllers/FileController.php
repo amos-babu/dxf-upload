@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FileUploadRequest;
 use App\Http\Resources\FileResource;
 use App\Models\File;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class FileController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
         $files = File::select('id', 'name', 'image', 'dxf_file')->latest()->paginate(10);
         return Inertia::render("dashboard", [
@@ -24,7 +27,7 @@ class FileController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): Response
     {
         return Inertia::render("files/create");
     }
@@ -32,11 +35,11 @@ class FileController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(FileUploadRequest $request)
+    public function store(FileUploadRequest $request): RedirectResponse
     {
 
         $data = $request->validated();
-        $data["user_id"] = auth()->id();
+        $data["user_id"] = Auth::id();
 
         if ($request->hasFile("image")) {
             $filePath = $request->file("image")->store("images", "public");
@@ -56,7 +59,7 @@ class FileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(File $file)
+    public function show(File $file): Response
     {
         return Inertia::render("files/show",[
             "file" => $file,
@@ -66,7 +69,7 @@ class FileController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(File $file)
+    public function edit(File $file): Response
     {
         return Inertia::render("files/update");
     }
@@ -74,7 +77,7 @@ class FileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, File $file)
+    public function update(Request $request, File $file): RedirectResponse
     {
         $data = $request->validate([
             "name" => ["nullable"],
@@ -101,7 +104,7 @@ class FileController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(File $file)
+    public function destroy(File $file): RedirectResponse
     {
         $file->delete();
         return to_route("files.index");
