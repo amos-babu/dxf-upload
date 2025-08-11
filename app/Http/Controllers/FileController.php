@@ -18,7 +18,7 @@ class FileController extends Controller
      */
     public function index(): Response
     {
-        $files = File::select('id', 'name', 'image', 'dxf_file')->latest()->paginate(10);
+        $files = File::select('id', 'name', 'image', 'dxf_file')->latest()->paginate(9);
         return Inertia::render("dashboard", [
             "files" => FileResource::collection($files),
         ]);

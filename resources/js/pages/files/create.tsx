@@ -61,7 +61,7 @@ export default function Create() {
                             name="image"
                             id="picture"
                             type="file"
-                            className="mt-3"
+                            className="mt-3 cursor-pointer"
                         />
                         <p className="font-sans text-sm text-red-600">{errors.image}</p>
                     </div>
@@ -72,7 +72,7 @@ export default function Create() {
                             name="dxf_file"
                             id="picture"
                             type="file"
-                            className="mt-3"
+                            className="mt-3 cursor-pointer"
                         />
                         <p className="font-sans text-sm text-red-600">{errors.dxf_file}</p>
                     </div>

@@ -1,8 +1,8 @@
-import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 import AppLayout from '@/layouts/app-layout';
 import { FileProps, FlashProps, type BreadcrumbItem } from '@/types';
-import { Head, usePage } from '@inertiajs/react';
-import { useState } from 'react';
+import { Head, Link, usePage } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 import { toast, Toaster } from 'sonner';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -16,26 +16,30 @@ export default function Dashboard({ files }: { files: FileProps }) {
     const { flash } = usePage<FlashProps>().props;
     const [successMessage, setSuccessMessage] = useState(flash.success);
 
-    console.log(files);
-    if (successMessage) {
-        toast.success(successMessage);
-        setSuccessMessage(undefined);
-    }
+    useEffect(() => {
+        if (successMessage) {
+            toast.success(successMessage);
+            setSuccessMessage(undefined);
+        }
+    }, [successMessage]);
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
-            <Toaster richColors position="bottom-center" />
+            <Toaster richColors position="top-center" />
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
                 <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-                    <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                    <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                    <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
+                    {files.data.map((file) => (
+                        <Link key={file.id} href={route('files.show', file)}>
+                            <AspectRatio ratio={15 / 9} className="rounded-lg bg-muted">
+                                <img
+                                    src={file.image}
+                                    alt={file.name}
+                                    className="h-full w-full rounded-lg object-cover dark:brightness-[0.2] dark:grayscale"
+                                />
+                            </AspectRatio>
+                        </Link>
+                    ))}
                 </div>
             </div>
         </AppLayout>
