@@ -1,6 +1,6 @@
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
-import { FlashProps, type BreadcrumbItem } from '@/types';
+import { FileProps, FlashProps, type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import { toast, Toaster } from 'sonner';
@@ -12,15 +12,14 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-
-export default function Dashboard({ files }) {
+export default function Dashboard({ files }: { files: FileProps }) {
     const { flash } = usePage<FlashProps>().props;
     const [successMessage, setSuccessMessage] = useState(flash.success);
 
-    console.log(files)
+    console.log(files);
     if (successMessage) {
         toast.success(successMessage);
-        setSuccessMessage(undefined)
+        setSuccessMessage(undefined);
     }
     return (
         <AppLayout breadcrumbs={breadcrumbs}>

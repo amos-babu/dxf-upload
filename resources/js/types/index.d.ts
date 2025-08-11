@@ -47,11 +47,40 @@ export interface CreateProps {
     description: string;
     image: File | null;
     dxf_file: File | null;
-};
+}
 
 export interface FlashProps {
     flash: {
         success?: string;
     };
     [key: string]: any;
+}
+
+export interface FileProps {
+    data: {
+        id: number;
+        name: string;
+        image: string;
+        dxfFile: string;
+    }[];
+    links: {
+        first: string;
+        last: string;
+        next?: string;
+        prev?: string;
+    };
+    meta: {
+        current_page: number;
+        from: number;
+        last_page: number;
+        links: {
+            active: boolean;
+            label: string;
+            url: string;
+        }[];
+        path: string;
+        per_page: number;
+        to: number;
+        total: number;
+    };
 }
