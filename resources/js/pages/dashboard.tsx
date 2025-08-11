@@ -23,20 +23,20 @@ export default function Dashboard({ files }: { files: FileProps }) {
         setNextPage(files.links.next)
     }, [files])
 
-    const loadMore = () => {
-        if (!nextPage) return
+    // const loadMore = () => {
+    //     if (!nextPage) return
 
-        router.visit(nextPage, {
-            preserveScroll: true,
-            preserveState: true,
-            replace: true,
-            only: ['files'],
-            onSuccess: (page) => {
-                setItems(prev => [...prev, ...page.props.files.data ])
-                setNextPage(page.props.files.links.next);
-            }
-        });
-    };
+    //     router.visit(nextPage, {
+    //         preserveScroll: true,
+    //         preserveState: true,
+    //         replace: true,
+    //         only: ['files'],
+    //         onSuccess: (page) => {
+    //             setItems(prev => [...prev, ...page.props.files.data ])
+    //             setNextPage(page.props.files.links.next);
+    //         }
+    //     });
+    // };
 
 
     useEffect(() => {
