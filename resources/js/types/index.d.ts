@@ -84,3 +84,8 @@ export interface FileProps {
         total: number;
     };
 }
+
+export interface DashboardPageProps {
+    files: FileProps;
+}
+
