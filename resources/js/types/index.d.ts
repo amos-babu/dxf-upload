@@ -56,13 +56,15 @@ export interface FlashProps {
     [key: string]: any;
 }
 
+export interface FileDataProps {
+    id: number;
+    name: string;
+    image: string;
+    dxfFile: string;
+}
+
 export interface FileProps {
-    data: {
-        id: number;
-        name: string;
-        image: string;
-        dxfFile: string;
-    }[];
+    data: FileDataProps[];
     links: {
         first: string;
         last: string;
@@ -88,4 +90,3 @@ export interface FileProps {
 export interface DashboardPageProps {
     files: FileProps;
 }
-

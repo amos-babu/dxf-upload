@@ -1,7 +1,7 @@
-import { AspectRatio } from '@/components/ui/aspect-ratio';
+import DisplayFiles from '@/components/display-files';
 import AppLayout from '@/layouts/app-layout';
 import { DashboardPageProps, FileProps, FlashProps, type BreadcrumbItem } from '@/types';
-import { Head, Link, router, usePage } from '@inertiajs/react';
+import { Head, router, usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { toast, Toaster } from 'sonner';
@@ -49,6 +49,7 @@ export default function Dashboard({ files }: { files: FileProps }) {
             });
         }
     };
+    console.log(items);
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -56,17 +57,7 @@ export default function Dashboard({ files }: { files: FileProps }) {
             <Toaster richColors position="top-center" />
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
                 <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-                    {items.map((file, idx) => (
-                        <Link key={`${file.id}-${idx}`} href={route('files.show', file)}>
-                            <AspectRatio ratio={15 / 9} className="rounded-lg bg-muted">
-                                <img
-                                    src={file.image}
-                                    alt={file.name}
-                                    className="h-full w-full rounded-lg object-cover dark:brightness-[0.2] dark:grayscale"
-                                />
-                            </AspectRatio>
-                        </Link>
-                    ))}
+                    <DisplayFiles items={items} />
                 </div>
 
                 {hasMore && (
