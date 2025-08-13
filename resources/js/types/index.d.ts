@@ -63,6 +63,15 @@ export interface FileDataProps {
     dxfFile: string;
 }
 
+export interface ShowFileDataProps {
+    id: number;
+    name: string;
+    description: string;
+    image: string;
+    dxfFile: string;
+    createdAt: string;
+}
+
 export interface FileProps {
     data: FileDataProps[];
     links: {

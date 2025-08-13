@@ -49,7 +49,6 @@ export default function Dashboard({ files }: { files: FileProps }) {
             });
         }
     };
-    console.log(items);
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>

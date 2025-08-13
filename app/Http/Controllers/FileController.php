@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FileUploadRequest;
 use App\Http\Resources\FileResource;
+use App\Http\Resources\ShowFileResource;
 use App\Models\File;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -62,7 +63,7 @@ class FileController extends Controller
     public function show(File $file): Response
     {
         return Inertia::render("files/show",[
-            "file" => $file,
+            "file" => new ShowFileResource($file),
         ]);
     }
 

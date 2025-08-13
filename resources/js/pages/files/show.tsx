@@ -1,7 +1,8 @@
 import AppLayout from '@/layouts/app-layout';
-import { BreadcrumbItem } from '@/types';
+import { BreadcrumbItem, ShowFileDataProps } from '@/types';
 
-export default function Show() {
+export default function Show({ file }: { file: ShowFileDataProps }) {
+    console.log(file);
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Show File',
