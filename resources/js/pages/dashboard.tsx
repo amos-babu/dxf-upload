@@ -50,6 +50,19 @@ export default function Dashboard({ files }: { files: FileProps }) {
         }
     };
 
+    useEffect(() => {
+        const cached = localStorage.getItem('files');
+        if (cached) {
+            setItems(JSON.parse(cached));
+        } else {
+            setItems(prev => [...prev, ...files.data]);
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('files', JSON.stringify(items));
+    }, [items]);
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
