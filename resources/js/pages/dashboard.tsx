@@ -2,6 +2,7 @@ import DisplayFiles from '@/components/display-files';
 import AppLayout from '@/layouts/app-layout';
 import { DashboardPageProps, FileProps, FlashProps, type BreadcrumbItem } from '@/types';
 import { Head, router, usePage } from '@inertiajs/react';
+import { LoaderCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { toast, Toaster } from 'sonner';
@@ -55,7 +56,7 @@ export default function Dashboard({ files }: { files: FileProps }) {
         if (cached) {
             setItems(JSON.parse(cached));
         } else {
-            setItems(prev => [...prev, ...files.data]);
+            setItems((prev) => [...prev, ...files.data]);
         }
     }, []);
 
@@ -73,8 +74,9 @@ export default function Dashboard({ files }: { files: FileProps }) {
                 </div>
 
                 {hasMore && (
-                    <div ref={ref} className="text-center">
-                        <h1 className="text-center text-4xl font-bold">Loading ...</h1>
+                    <div ref={ref} className="flex justify-center gap-3">
+                        <LoaderCircle className="h-10 w-10 animate-spin" />
+                        <h1 className="self-center text-2xl font-bold">Loading...</h1>
                     </div>
                 )}
             </div>

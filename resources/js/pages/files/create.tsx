@@ -5,10 +5,11 @@ import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { BreadcrumbItem, CreateProps } from '@/types';
 import { useForm } from '@inertiajs/react';
+import { LoaderCircle } from 'lucide-react';
 import React from 'react';
 
 export default function Create() {
-    const { data, setData, post, errors } = useForm<CreateProps>({
+    const { data, setData, post, errors, processing } = useForm<CreateProps>({
         name: '',
         description: '',
         image: null,
@@ -77,7 +78,10 @@ export default function Create() {
                         <p className="font-sans text-sm text-red-600">{errors.dxf_file}</p>
                     </div>
                     <div className="px-6 pt-3">
-                        <Button type="submit">Submit</Button>
+                        <Button type="submit" disabled={processing}>
+                            {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
+                            Submit
+                        </Button>
                     </div>
                 </form>
             </div>
