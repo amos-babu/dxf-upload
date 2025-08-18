@@ -64,12 +64,14 @@ export interface FileDataProps {
 }
 
 export interface ShowFileDataProps {
-    id: number;
-    name: string;
-    description: string;
-    image: string;
-    dxfFile: string;
-    createdAt: string;
+    data: {
+        id: number;
+        name: string;
+        description: string;
+        image: string;
+        dxfFile: string;
+        createdAt: string;
+    };
 }
 
 export interface FileProps {

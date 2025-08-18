@@ -69,7 +69,7 @@ export default function Dashboard({ files }: { files: FileProps }) {
             <Head title="Dashboard" />
             <Toaster richColors position="top-center" />
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-                <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+                <div className="grid auto-rows-min gap-4 md:grid-cols-4">
                     <DisplayFiles items={items} />
                 </div>
 
