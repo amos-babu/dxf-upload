@@ -11,15 +11,15 @@ import { useInitials } from '@/hooks/use-initials';
 import { cn } from '@/lib/utils';
 import { type BreadcrumbItem, type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, LogIn, Menu, Search, Upload } from 'lucide-react';
+import { BookOpen, Folder, LogIn, LucideHome, Menu, Search, Upload } from 'lucide-react';
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: 'Home',
         href: '/',
-        icon: LayoutGrid,
+        icon: LucideHome,
     },
 
     {
