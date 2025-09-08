@@ -14,6 +14,7 @@ import { Link, usePage } from '@inertiajs/react';
 import { BookOpen, Folder, LogIn, LucideHome, Menu, Search, Upload } from 'lucide-react';
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
+import { Input } from './ui/input';
 
 const mainNavItems: NavItem[] = [
     {
@@ -128,6 +129,9 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                 ))}
                             </NavigationMenuList>
                         </NavigationMenu>
+                        <div className="bg-amber-50">
+                            <Input className="w-full" type="text" autoFocus tabIndex={1} placeholder="Search for files here" />
+                        </div>
                     </div>
 
                     <div className="ml-auto flex items-center space-x-2">

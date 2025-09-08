@@ -2,6 +2,7 @@ import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
+import GoogleAppLogoIcon from '@/components/google-icon';
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
@@ -95,6 +96,15 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                         Log in
                     </Button>
                 </div>
+                <div>
+                    <p className="text-center text-sm text-balance text-muted-foreground">Or</p>
+                </div>
+
+                <Button variant={'outline'} type="submit" className="w-full" tabIndex={4} disabled={processing}>
+                    <GoogleAppLogoIcon className="mr-2 size-8 fill-current text-white" />
+                    {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
+                    Sign In With Google
+                </Button>
 
                 <div className="text-center text-sm text-muted-foreground">
                     Don't have an account?{' '}

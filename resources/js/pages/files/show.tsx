@@ -1,3 +1,4 @@
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
@@ -13,13 +14,9 @@ export default function Show({ file }: { file: ShowFileDataProps }) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <div className="mt-10 flex w-full flex-col justify-center gap-5 md:flex-row">
-                {/* <AspectRatio ratio={12 / 6} className="rounded-lg bg-muted">
-                        <img
-                            src={file.data.image}
-                            alt={file.data.name}
-                            className="h-full w-full rounded-lg border object-cover shadow-lg transition-transform duration-300 hover:scale-105"
-                        />
-                    </AspectRatio> */}
+                <AspectRatio ratio={19 / 5} className="rounded-lg bg-muted">
+                    <img src={file.data.image} alt={file.data.name} className="h-full w-full rounded-lg border object-cover shadow-lg" />
+                </AspectRatio>
 
                 {/* <figure className="bg-muted">
                     <img className="h-auto rounded-md" src={file.data.image} alt={file.data.name} />
