@@ -9,6 +9,7 @@ use App\Models\File;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -66,6 +67,25 @@ class FileController extends Controller
         return Inertia::render("files/show",[
             "file" => new ShowFileResource($file),
         ]);
+    }
+
+    public function imageDownload(File $file) {
+        //   dd(storage_path("app/public". $file->dxf_file));
+
+        if (Storage::disk('public')->exists($file->dxf_file)) {
+            $absolutePath = Storage::disk('public')->path($file->dxf_file);
+
+            Storage::download($absolutePath, basename($file->dxf_file));
+
+            // return response()->download($absolutePath, basename($file->dxf_file));
+        }
+
+        abort(404, 'File not found');
+    }
+
+    public function dxfDownload(File $file) {
+        dd(storage_path("app/public". $file->dxf_file));
+
     }
 
     /**
