@@ -21,7 +21,7 @@ export default function Dashboard({ files }: { files: FileProps }) {
     const [hasMore, setHasMore] = useState(true);
     const { ref, inView } = useInView();
 
-    console.log(items);
+    console.log();
 
     useEffect(() => {
         if (flash.success) toast.success(flash.success);
@@ -72,7 +72,7 @@ export default function Dashboard({ files }: { files: FileProps }) {
             <Toaster richColors position="top-center" />
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
                 <div className="grid auto-rows-min gap-4 md:grid-cols-4">
-                    <DisplayFiles items={files.data} />
+                    <DisplayFiles items={items} />
                 </div>
 
                 {hasMore && (
