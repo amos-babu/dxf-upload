@@ -3,7 +3,7 @@ import AppLayout from '@/layouts/app-layout';
 import { DashboardPageProps, FileProps, FlashProps, type BreadcrumbItem } from '@/types';
 import { Head, router, usePage } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { toast, Toaster } from 'sonner';
 
@@ -21,8 +21,6 @@ export default function Dashboard({ files }: { files: FileProps }) {
     const [hasMore, setHasMore] = useState(true);
     const { ref, inView } = useInView();
 
-    console.log();
-
     useEffect(() => {
         if (flash.success) toast.success(flash.success);
     }, [flash.success]);
@@ -32,9 +30,9 @@ export default function Dashboard({ files }: { files: FileProps }) {
             loadMore();
             setHasMore(files.meta.current_page < files.meta.last_page);
         }
-    }, [inView]);
+    }, [inView, hasMore, files.meta.current_page, files.meta.last_page]);
 
-    const loadMore = () => {
+    const loadMore = useCallback(() => {
         if (!hasMore) return;
 
         if (nextPageUrl) {
@@ -51,7 +49,7 @@ export default function Dashboard({ files }: { files: FileProps }) {
                 },
             });
         }
-    };
+    }, [hasMore, nextPageUrl]);
 
     useEffect(() => {
         const cached = localStorage.getItem('files');
@@ -60,7 +58,7 @@ export default function Dashboard({ files }: { files: FileProps }) {
         } else {
             setItems((prev) => [...prev, ...files.data]);
         }
-    }, []);
+    }, [files.data]);
 
     useEffect(() => {
         localStorage.setItem('files', JSON.stringify(items));

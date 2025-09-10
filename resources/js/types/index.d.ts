@@ -53,7 +53,7 @@ export interface FlashProps {
     flash: {
         success?: string;
     };
-    [key: string]: any;
+    [key: string]: string | undefined;
 }
 
 export interface FileDataProps {

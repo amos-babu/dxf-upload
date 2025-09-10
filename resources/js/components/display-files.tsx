@@ -2,12 +2,12 @@ import { FileDataProps } from '@/types';
 import { Link } from '@inertiajs/react';
 
 export default function DisplayFiles({ items }: { items: FileDataProps[] }) {
-    const breakpointColumnsObj = {
-        default: 3,
-        1100: 3,
-        700: 2,
-        500: 1,
-    };
+    // const breakpointColumnsObj = {
+    //     default: 3,
+    //     1100: 3,
+    //     700: 2,
+    //     500: 1,
+    // };
     return items.map((file, idx) => (
         // <Masonry className="my-masonry-grid" columnClassName="my-masonry-grid_column" key={`${file.id}-${idx}`} breakpointCols={breakpointColumnsObj}>
         <Link key={`${file.id}-${idx}`} href={route('files.show', { file: file.id })}>
