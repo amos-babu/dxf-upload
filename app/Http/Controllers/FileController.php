@@ -38,7 +38,6 @@ class FileController extends Controller
      */
     public function store(FileUploadRequest $request): RedirectResponse
     {
-
         $data = $request->validated();
         $data["user_id"] = Auth::id();
 
@@ -48,7 +47,9 @@ class FileController extends Controller
         }
 
         if ($request->hasFile("dxf_file")) {
-            $filePath = $request->file("dxf_file")->store("dxf_files", "public");
+             $dxfFile = $request->file('dxf_file');
+            $dxfFileName = time().'.dxf';
+            $filePath = $dxfFile->storeAs('dxf_files', $dxfFileName, 'public');
             $data["dxf_file"] = $filePath;
         }
 
