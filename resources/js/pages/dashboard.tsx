@@ -1,10 +1,9 @@
 import DisplayFiles from '@/components/display-files';
 import AppLayout from '@/layouts/app-layout';
-import { DashboardPageProps, FileProps, FlashProps, type BreadcrumbItem } from '@/types';
-import { Head, router, usePage } from '@inertiajs/react';
-import { LoaderCircle } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
+import { FileProps, FlashProps, type BreadcrumbItem } from '@/types';
+import { Head, Link, usePage } from '@inertiajs/react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { toast, Toaster } from 'sonner';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -17,52 +16,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 export default function Dashboard({ files }: { files: FileProps }) {
     const { flash } = usePage<FlashProps>().props;
     const [items, setItems] = useState(files.data);
-    const [nextPageUrl, setNextPageUrl] = useState<string | undefined>(files.links.next);
-    const [hasMore, setHasMore] = useState(true);
-    const { ref, inView } = useInView();
 
     useEffect(() => {
         if (flash.success) toast.success(flash.success);
     }, [flash.success]);
-
-    useEffect(() => {
-        if (inView) {
-            loadMore();
-            setHasMore(files.meta.current_page < files.meta.last_page);
-        }
-    }, [inView, hasMore, files.meta.current_page, files.meta.last_page]);
-
-    const loadMore = useCallback(() => {
-        if (!hasMore) return;
-
-        if (nextPageUrl) {
-            router.visit(nextPageUrl, {
-                preserveScroll: true,
-                preserveState: true,
-                replace: true,
-                only: ['files'],
-                onSuccess: (page) => {
-                    const props = page.props as unknown as DashboardPageProps;
-
-                    setItems((prev) => [...prev, ...props.files.data]);
-                    setNextPageUrl(props.files.links.next);
-                },
-            });
-        }
-    }, [hasMore, nextPageUrl]);
-
-    useEffect(() => {
-        const cached = localStorage.getItem('files');
-        if (cached) {
-            setItems(JSON.parse(cached));
-        } else {
-            setItems((prev) => [...prev, ...files.data]);
-        }
-    }, [files.data]);
-
-    useEffect(() => {
-        localStorage.setItem('files', JSON.stringify(items));
-    }, [items]);
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -73,12 +30,33 @@ export default function Dashboard({ files }: { files: FileProps }) {
                     <DisplayFiles items={items} />
                 </div>
 
-                {hasMore && (
-                    <div ref={ref} className="flex justify-center gap-3">
-                        <LoaderCircle className="h-10 w-10 animate-spin" />
-                        <h1 className="self-center text-2xl font-bold">Loading...</h1>
-                    </div>
-                )}
+                <div className="mt-10 flex justify-center gap-10">
+                    {files.links.prev ? (
+                        <div className="flex gap-3">
+                            <ChevronLeft className="h-5 w-5 self-center" />
+                            <Link href={files.links.prev}>Previous</Link>
+                        </div>
+                    ) : (
+                        <div className="flex gap-3">
+                            <ChevronLeft color="gray" className="h-5 w-5 self-center" />
+                            <p className="cursor-pointer text-base text-muted-foreground">Previous</p>
+                        </div>
+                    )}
+
+                    {files.links.next ? (
+                        <div className="flex gap-3">
+                            <Link href={files.links.next} className="self-center">
+                                Next
+                            </Link>
+                            <ChevronRight className="h-5 w-5 self-center" />
+                        </div>
+                    ) : (
+                        <div className="flex gap-3">
+                            <p className="cursor-pointer self-center text-base text-muted-foreground">Next</p>
+                            <ChevronRight color="gray" className="h-5 w-5 self-center" />
+                        </div>
+                    )}
+                </div>
             </div>
         </AppLayout>
     );
