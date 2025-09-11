@@ -12,7 +12,7 @@ export default function Show({ file }: { file: ShowFileDataProps }) {
         },
     ];
 
-    return (    
+    return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <div className="mt-10 flex w-full flex-col justify-center gap-5 md:flex-row">
                 <figure className="max-w-lg rounded-lg bg-muted p-3 transition-transform duration-300 hover:scale-105 hover:rounded-2xl hover:shadow-lg">
