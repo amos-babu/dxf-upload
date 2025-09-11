@@ -70,21 +70,23 @@ class FileController extends Controller
     }
 
     public function imageDownload(File $file) {
-        //   dd(storage_path("app/public". $file->dxf_file));
+        $path = Storage::disk('public')->path($file->image);
 
-        if (Storage::disk('public')->exists($file->dxf_file)) {
-            $absolutePath = Storage::disk('public')->path($file->dxf_file);
-
-            Storage::download($absolutePath, basename($file->dxf_file));
-
-            // return response()->download($absolutePath, basename($file->dxf_file));
+        if (!file_exists($path)) {
+            abort(404, 'File not found.');
         }
 
-        abort(404, 'File not found');
+        return response()->download($path, $file->original_name);
     }
 
     public function dxfDownload(File $file) {
-        dd(storage_path("app/public". $file->dxf_file));
+        $path = Storage::disk('public')->path($file->dxf_file);
+
+        if (!file_exists($path)) {
+            abort(404, 'File not found.');
+        }
+
+        return response()->download($path, $file->original_name);
 
     }
 
