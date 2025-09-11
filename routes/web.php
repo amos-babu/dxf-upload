@@ -4,14 +4,6 @@ use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-// Route::get('/', function () {
-//     return Inertia::render('welcome');
-// })->name('home');
-
-// Route::get('/', function () {
-//     return Inertia::render('dashboard');
-// })->name('dashboard');
-
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('files', FileController::class)->except(["index", "show"]);
 });

@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
 import { BreadcrumbItem, ShowFileDataProps } from '@/types';
-import { HeartIcon } from 'lucide-react';
+import { HeartIcon, Trash } from 'lucide-react';
 
 export default function Show({ file }: { file: ShowFileDataProps }) {
     const breadcrumbs: BreadcrumbItem[] = [
@@ -12,7 +12,7 @@ export default function Show({ file }: { file: ShowFileDataProps }) {
         },
     ];
 
-    return (
+    return (    
         <AppLayout breadcrumbs={breadcrumbs}>
             <div className="mt-10 flex w-full flex-col justify-center gap-5 md:flex-row">
                 <figure className="max-w-lg rounded-lg bg-muted p-3 transition-transform duration-300 hover:scale-105 hover:rounded-2xl hover:shadow-lg">
@@ -25,8 +25,14 @@ export default function Show({ file }: { file: ShowFileDataProps }) {
                             <CardTitle>{file.data.name}</CardTitle>
                             <CardDescription>{file.data.createdAt}</CardDescription>
                         </div>
-                        <div className="cursor-pointer rounded-xl hover:bg-gray-500 hover:text-gray-50 dark:hover:bg-amber-50 dark:hover:text-gray-500">
-                            <HeartIcon strokeWidth={1} className="m-2" />
+                        <div className="flex">
+                            <div className="cursor-pointer rounded-xl hover:bg-gray-200 dark:hover:bg-gray-50 dark:hover:text-gray-900">
+                                <HeartIcon className="m-2" />
+                            </div>
+
+                            <div className="cursor-pointer rounded-xl hover:bg-red-600 hover:text-gray-50 dark:hover:text-gray-100">
+                                <Trash className="m-2" />
+                            </div>
                         </div>
                     </CardHeader>
                     <CardContent>

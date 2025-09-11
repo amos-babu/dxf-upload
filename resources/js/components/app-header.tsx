@@ -14,7 +14,6 @@ import { Link, usePage } from '@inertiajs/react';
 import { BookOpen, Folder, LogIn, LucideHome, Menu, Search, Upload } from 'lucide-react';
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
-import { Input } from './ui/input';
 
 const mainNavItems: NavItem[] = [
     {
@@ -133,12 +132,10 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
 
                     <div className="ml-auto flex items-center space-x-2">
                         <div className="relative flex items-center space-x-1">
-                            <div className="w-full bg-amber-50">
-                                <Input className="w-full" type="text" autoFocus tabIndex={1} placeholder="Search for files here" />
-                            </div>
                             <Button variant="ghost" size="icon" className="group h-9 w-9 cursor-pointer">
                                 <Search className="!size-5 opacity-80 group-hover:opacity-100" />
                             </Button>
+
                             <div className="hidden lg:flex">
                                 {rightNavItems.map((item) => (
                                     <TooltipProvider key={item.title} delayDuration={0}>
