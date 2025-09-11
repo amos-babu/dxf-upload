@@ -76,12 +76,7 @@ export interface ShowFileDataProps {
 
 export interface FileProps {
     data: FileDataProps[];
-    links: {
-        first: string;
-        last: string;
-        next?: string;
-        prev?: string;
-    };
+    links: LinksProps;
     meta: {
         current_page: number;
         from: number;
@@ -96,6 +91,13 @@ export interface FileProps {
         to: number;
         total: number;
     };
+}
+
+export interface LinksProps {
+    first: string;
+    last: string;
+    next?: string;
+    prev?: string;
 }
 
 export interface DashboardPageProps {

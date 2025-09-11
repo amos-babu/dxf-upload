@@ -1,8 +1,8 @@
 import DisplayFiles from '@/components/display-files';
+import Pagination from '@/components/pagination-links';
 import AppLayout from '@/layouts/app-layout';
 import { FileProps, FlashProps, type BreadcrumbItem } from '@/types';
-import { Head, Link, usePage } from '@inertiajs/react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Head, usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { toast, Toaster } from 'sonner';
 
@@ -29,34 +29,7 @@ export default function Dashboard({ files }: { files: FileProps }) {
                 <div className="grid auto-rows-min gap-4 md:grid-cols-4">
                     <DisplayFiles items={items} />
                 </div>
-
-                <div className="mt-10 flex justify-center gap-10">
-                    {files.links.prev ? (
-                        <div className="flex gap-3">
-                            <ChevronLeft className="h-5 w-5 self-center" />
-                            <Link href={files.links.prev}>Previous</Link>
-                        </div>
-                    ) : (
-                        <div className="flex gap-3">
-                            <ChevronLeft color="gray" className="h-5 w-5 self-center" />
-                            <p className="cursor-pointer text-base text-muted-foreground">Previous</p>
-                        </div>
-                    )}
-
-                    {files.links.next ? (
-                        <div className="flex gap-3">
-                            <Link href={files.links.next} className="self-center">
-                                Next
-                            </Link>
-                            <ChevronRight className="h-5 w-5 self-center" />
-                        </div>
-                    ) : (
-                        <div className="flex gap-3">
-                            <p className="cursor-pointer self-center text-base text-muted-foreground">Next</p>
-                            <ChevronRight color="gray" className="h-5 w-5 self-center" />
-                        </div>
-                    )}
-                </div>
+                <Pagination links={files.links} />
             </div>
         </AppLayout>
     );
