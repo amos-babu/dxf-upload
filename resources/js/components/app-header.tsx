@@ -11,7 +11,7 @@ import { useInitials } from '@/hooks/use-initials';
 import { cn } from '@/lib/utils';
 import { type BreadcrumbItem, type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, Folder, LogIn, LucideHome, Menu, Search, Upload } from 'lucide-react';
+import { BookOpen, Folder, LogIn, LucideHome, Menu, Upload } from 'lucide-react';
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
 import { CommandMenu } from './command-menu';
@@ -176,7 +176,9 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                         ) : (
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
-                                    <Icon iconNode={LogIn} className="m-3 h-5 w-5 cursor-pointer" />
+                                    <div className="cursor-pointer rounded-md hover:bg-gray-100">
+                                        <Icon iconNode={LogIn} className="m-2 h-5 w-5 cursor-pointer" />
+                                    </div>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent className="w-50" align="start">
                                     <div className="flex flex-col">
