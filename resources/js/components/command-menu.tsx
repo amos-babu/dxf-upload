@@ -1,5 +1,7 @@
+import { Search } from 'lucide-react';
 import React from 'react';
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from './search-cmdk';
+import { Button } from './ui/button';
 
 export function CommandMenu() {
     const [open, setOpen] = React.useState(false);
@@ -18,7 +20,10 @@ export function CommandMenu() {
 
     return (
         <>
-            <div onClick={() => setOpen(true)} className="flex cursor-pointer items-center justify-center gap-2 rounded-md bg-gray-100 px-2">
+            <div
+                onClick={() => setOpen(true)}
+                className="hidden cursor-pointer items-center justify-center gap-2 rounded-md bg-gray-100 px-2 md:flex"
+            >
                 <p className="m-2 text-sm text-muted-foreground">Search for files ...</p>
                 <div className="rounded-sm border border-gray-300 bg-white px-2">
                     <p className="text-sm text-muted-foreground">Ctrl</p>
@@ -27,9 +32,9 @@ export function CommandMenu() {
                     <p className="text-sm text-muted-foreground">K</p>
                 </div>
             </div>
-            {/* <Button onClick={() => setOpen(true)} variant="ghost" size="icon" className="group h-9 w-9 cursor-pointer">
+            <Button onClick={() => setOpen(true)} variant="ghost" size="icon" className="group h-9 w-9 cursor-pointer lg:hidden">
                 <Search className="!size-5 opacity-80 group-hover:opacity-100" />
-            </Button> */}
+            </Button>
             <CommandDialog open={open} onOpenChange={setOpen} className="w-full">
                 <CommandInput autoFocus placeholder="Type a command or search..." />
                 <CommandList>
