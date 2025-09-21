@@ -38,9 +38,9 @@ export default function Show({ file }: { file: ShowFileDataProps }) {
                         <p>{file.data.description}</p>
                     </CardContent>
                     <CardFooter className="flex gap-5">
-                        <a href={route('image.download', { file: file.data.id })}>
+                        {/* <a href={route('image.download', { file: file.data.id })}>
                             <Button className="cursor-pointer">Download Image</Button>
-                        </a>
+                        </a> */}
                         <a href={route('dxf.download', { file: file.data.id })}>
                             <Button className="cursor-pointer">Download Dxf</Button>
                         </a>

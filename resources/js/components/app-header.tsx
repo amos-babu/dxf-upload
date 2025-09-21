@@ -11,7 +11,7 @@ import { useInitials } from '@/hooks/use-initials';
 import { cn } from '@/lib/utils';
 import { type BreadcrumbItem, type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, Folder, LogIn, LucideHome, Menu, Upload } from 'lucide-react';
+import { LogIn, LucideHome, Menu, ShoppingCartIcon, Upload } from 'lucide-react';
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
 import { CommandMenu } from './command-menu';
@@ -32,14 +32,9 @@ const mainNavItems: NavItem[] = [
 
 const rightNavItems: NavItem[] = [
     {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
+        title: 'Cart',
+        href: '/cart',
+        icon: ShoppingCartIcon,
     },
 ];
 
@@ -55,8 +50,8 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
     const getInitials = useInitials();
     return (
         <>
-            <div className="border-b border-sidebar-border/80">
-                <div className="mx-auto flex h-16 items-center px-4 md:max-w-7xl">
+            <div className="border-b-4 border-sidebar-border/80">
+                <div className="mx-auto flex h-20 items-center px-4 md:max-w-7xl">
                     {/* Mobile Menu */}
                     <div className="lg:hidden">
                         <Sheet>
@@ -119,11 +114,11 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                                 'h-9 cursor-pointer px-3',
                                             )}
                                         >
-                                            {item.icon && <Icon iconNode={item.icon} className="mr-2 h-4 w-4" />}
+                                            {item.icon && <Icon iconNode={item.icon} className="mr-2 size-5" />}
                                             {item.title}
                                         </Link>
                                         {page.url === item.href && (
-                                            <div className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"></div>
+                                            <div className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-primary dark:bg-white"></div>
                                         )}
                                     </NavigationMenuItem>
                                 ))}
