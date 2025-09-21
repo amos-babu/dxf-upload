@@ -22,14 +22,14 @@ export function CommandMenu() {
         <>
             <div
                 onClick={() => setOpen(true)}
-                className="hidden cursor-pointer items-center justify-center gap-2 rounded-md bg-gray-100 px-2 md:flex"
+                className="hidden cursor-pointer items-center justify-center gap-2 rounded-md bg-gray-100 px-2 md:flex dark:bg-neutral-700"
             >
-                <p className="m-2 text-sm text-muted-foreground">Search for files ...</p>
-                <div className="rounded-sm border border-gray-300 bg-white px-2">
-                    <p className="text-sm text-muted-foreground">Ctrl</p>
+                <p className="m-2 text-sm text-muted-foreground dark:text-gray-200">Search for files ...</p>
+                <div className="rounded-sm border border-gray-300 bg-white px-2 dark:border-neutral-500 dark:bg-neutral-500">
+                    <p className="text-sm text-muted-foreground dark:text-gray-200">Ctrl</p>
                 </div>
-                <div className="rounded-sm border border-gray-300 bg-white px-2">
-                    <p className="text-sm text-muted-foreground">K</p>
+                <div className="rounded-sm border border-gray-300 bg-white px-2 dark:border-neutral-500 dark:bg-neutral-500">
+                    <p className="text-sm text-muted-foreground dark:text-gray-200">K</p>
                 </div>
             </div>
             <Button onClick={() => setOpen(true)} variant="ghost" size="icon" className="group h-9 w-9 cursor-pointer lg:hidden">
