@@ -80,7 +80,7 @@ class FileController extends Controller
     }
 
     public function dxfDownload(File $file) {
-        $path = Storage::disk('public')->path($file->dxf_file);
+        $path = Storage::disk('private')->path($file->dxf_file);
 
         if (!file_exists($path)) {
             abort(404, 'File not found.');
