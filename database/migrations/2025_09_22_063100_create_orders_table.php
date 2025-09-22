@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->string('image');
-            $table->string('dxf_file');
+            $table->foreignId('file_id')->constrained()->cascadeOnDelete();
             $table->decimal('amount', 8, 2);
+            // $table->enum('status', 'pending', 'paid', 'failed');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('orders');
     }
 };
