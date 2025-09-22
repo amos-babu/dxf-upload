@@ -13,7 +13,8 @@ class File extends Model
         "name",
         "description",
         "image",
-        "dxf_file"
+        "dxf_file",
+        "amount"
     ];
 
     public function user(): BelongsTo {

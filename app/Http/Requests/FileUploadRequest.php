@@ -27,6 +27,7 @@ class FileUploadRequest extends FormRequest
             "name" => ["required","string", "max:50"],
             "description" => ["nullable", "string", "max:255"],
             "image" => ["required", "image", "mimes:jpg,jpeg,png", "max:2048"],
+            "amount" => ["required", "numeric", "regex:/^\d+(\.\d{1,2})?$/"],
            'dxf_file' => [
                 'required',
                 'file',

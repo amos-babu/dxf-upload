@@ -12,6 +12,7 @@ export default function Create() {
     const { data, setData, post, errors, processing } = useForm<CreateProps>({
         name: '',
         description: '',
+        amount: null,
         image: null,
         dxf_file: null,
     });
@@ -56,6 +57,20 @@ export default function Create() {
                         <p className="font-sans text-sm text-red-600">{errors.description}</p>
                     </div>
                     <div className="px-6 py-3">
+                        <Label htmlFor="name">Price</Label>
+                        <Input
+                            value={data.amount ?? ''}
+                            onChange={(e) => setData('amount', e.target.valueAsNumber)}
+                            onBlur={() => setData('amount', Number((data.amount ?? 0).toFixed(2)))}
+                            name="amount"
+                            type="number"
+                            step="0.01"
+                            placeholder="Price"
+                            className="mt-3"
+                        />
+                        <p className="font-sans text-sm text-red-600">{errors.amount}</p>
+                    </div>
+                    <div className="px-6 py-3">
                         <Label htmlFor="name">File Image</Label>
                         <Input
                             onChange={(e) => setData('image', e.target.files ? e.target.files[0] : null)}
@@ -77,6 +92,7 @@ export default function Create() {
                         />
                         <p className="font-sans text-sm text-red-600">{errors.dxf_file}</p>
                     </div>
+
                     <div className="px-6 pt-3">
                         <Button type="submit" disabled={processing}>
                             {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}

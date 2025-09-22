@@ -45,6 +45,7 @@ export interface User {
 export type CreateProps = {
     name: string;
     description: string;
+    amount: number | null;
     image: File | null;
     dxf_file: File | null;
 };

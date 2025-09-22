@@ -50,7 +50,7 @@ class FileController extends Controller
         if ($request->hasFile("dxf_file")) {
              $dxfFile = $request->file('dxf_file');
             $dxfFileName = time().'.dxf';
-            $filePath = $dxfFile->storeAs('dxf_files', $dxfFileName, 'public');
+            $filePath = $dxfFile->storeAs('dxf_files', $dxfFileName, 'private');
             $data["dxf_file"] = $filePath;
         }
 
