@@ -6,14 +6,20 @@ enum Categories: string
 {
     case GATES = 'gates';
     case ENCLOSURES = 'enclosures';
-    case METERBOX = 'meterbox';
+    case METERBOXES = 'meterbox';
+    case PEDESTALS = 'pedestals';
+    case TRUNKING = 'trunking';
+    case CABLETRAYS = 'cabletrays';
 
     public function label(): string
     {
         return match ($this) {
             self::GATES => 'Gates',
             self::ENCLOSURES => 'Enclosures',
-            self::METERBOX => 'Meterboxes',
+            self::METERBOXES => 'Meterboxes',
+            self::PEDESTALS => 'pedestals',
+            self::TRUNKING => 'trunking',
+            self::CABLETRAYS => 'cabletrays'
         };
     }
 }
