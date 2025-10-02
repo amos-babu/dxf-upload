@@ -25,7 +25,7 @@ enum Categories: string
             self::CABLETRAYS => 'Cabletrays',
             self::CABINETS => 'Cabinets',
             self::KNOCKOUTS => 'Knockouts',
-            self::ELECTRICALBOARDS => 'Electricalboards'
+            self::ELECTRICALBOARDS => 'Electrical boards'
         };
     }
 }
