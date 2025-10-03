@@ -1,7 +1,7 @@
 <?php
 
 test('example', function () {
-    $response = $this->get('/');
+    $response = $this->get('/files');
 
     $response->assertStatus(200);
 });
