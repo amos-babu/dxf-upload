@@ -8,7 +8,7 @@ import { useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import React from 'react';
 
-export default function Create() {
+export default function Create({ categoryOptions }) {
     const { data, setData, post, errors, processing } = useForm<CreateProps>({
         name: '',
         description: '',
@@ -16,6 +16,8 @@ export default function Create() {
         image: null,
         dxf_file: null,
     });
+
+    console.log(categoryOptions);
 
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

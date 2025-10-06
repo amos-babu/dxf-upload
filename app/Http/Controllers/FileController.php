@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Categories;
 use App\Http\Requests\FileUploadRequest;
 use App\Http\Resources\FileResource;
 use App\Http\Resources\ShowFileResource;
@@ -21,8 +22,9 @@ class FileController extends Controller
     public function index(): Response
     {
         $files = File::select('id', 'name', 'image', 'dxf_file')->latest()->paginate(9);
-        return Inertia::render("dashboard", [
-            "files" => FileResource::collection($files),
+
+        return Inertia::render('dashboard', [
+            'files' => FileResource::collection($files),
         ]);
     }
 
@@ -31,7 +33,14 @@ class FileController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render("files/create");
+        $categoryOptions = collect(Categories::cases())->map(fn ($category) => [
+            'name' => $category->label(),
+            'value' => $category->value,
+        ]);
+
+        return Inertia::render('files/create', [
+            'categoryOptions' => $categoryOptions,
+        ]);
     }
 
     /**
@@ -40,23 +49,23 @@ class FileController extends Controller
     public function store(FileUploadRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $data["user_id"] = Auth::id();
+        $data['user_id'] = Auth::id();
 
-        if ($request->hasFile("image")) {
-            $filePath = $request->file("image")->store("images", "public");
-            $data["image"] = $filePath;
+        if ($request->hasFile('image')) {
+            $filePath = $request->file('image')->store('images', 'public');
+            $data['image'] = $filePath;
         }
 
-        if ($request->hasFile("dxf_file")) {
-             $dxfFile = $request->file('dxf_file');
+        if ($request->hasFile('dxf_file')) {
+            $dxfFile = $request->file('dxf_file');
             $dxfFileName = time().'.dxf';
             $filePath = $dxfFile->storeAs('dxf_files', $dxfFileName, 'private');
-            $data["dxf_file"] = $filePath;
+            $data['dxf_file'] = $filePath;
         }
 
         File::create($data);
 
-        return to_route("files.index")->with('success', 'Uploaded successfully');
+        return to_route('files.index')->with('success', 'Uploaded successfully');
     }
 
     /**
@@ -64,25 +73,27 @@ class FileController extends Controller
      */
     public function show(File $file): Response
     {
-        return Inertia::render("files/show",[
-            "file" => new ShowFileResource($file),
+        return Inertia::render('files/show', [
+            'file' => new ShowFileResource($file),
         ]);
     }
 
-    public function imageDownload(File $file) {
+    public function imageDownload(File $file)
+    {
         $path = Storage::disk('public')->path($file->image);
 
-        if (!file_exists($path)) {
+        if (! file_exists($path)) {
             abort(404, 'File not found.');
         }
 
         return response()->download($path, $file->original_name);
     }
 
-    public function dxfDownload(File $file) {
+    public function dxfDownload(File $file)
+    {
         $path = Storage::disk('private')->path($file->dxf_file);
 
-        if (!file_exists($path)) {
+        if (! file_exists($path)) {
             abort(404, 'File not found.');
         }
 
@@ -95,7 +106,7 @@ class FileController extends Controller
      */
     public function edit(File $file): Response
     {
-        return Inertia::render("files/update");
+        return Inertia::render('files/update');
     }
 
     /**
@@ -104,25 +115,25 @@ class FileController extends Controller
     public function update(Request $request, File $file): RedirectResponse
     {
         $data = $request->validate([
-            "name" => ["nullable"],
-            "description" => ["nullable"],
-            "image" => ["nulllable", "image"],
-            "dxf_file" => ["nullable", "file"],
+            'name' => ['nullable'],
+            'description' => ['nullable'],
+            'image' => ['nulllable', 'image'],
+            'dxf_file' => ['nullable', 'file'],
         ]);
 
-        if($request->hasFile("image")){
-            $filePath = $request->file("image")->store("images", "public");
-            $data["image"] = $filePath;
+        if ($request->hasFile('image')) {
+            $filePath = $request->file('image')->store('images', 'public');
+            $data['image'] = $filePath;
         }
 
-        if($request->hasFile("dxf_file")){
-            $filePath = $request->file("dxf_file")->store("dxf_files", "public");
-            $data["dxf_file"] = $filePath;
+        if ($request->hasFile('dxf_file')) {
+            $filePath = $request->file('dxf_file')->store('dxf_files', 'public');
+            $data['dxf_file'] = $filePath;
         }
 
         $file->update($data);
 
-        return to_route("files.index");
+        return to_route('files.index');
     }
 
     /**
@@ -131,6 +142,7 @@ class FileController extends Controller
     public function destroy(File $file): RedirectResponse
     {
         $file->delete();
-        return to_route("files.index");
+
+        return to_route('files.index');
     }
 }
