@@ -16,9 +16,6 @@ use Inertia\Response;
 
 class FileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): Response
     {
         $files = File::select('id', 'name', 'image', 'dxf_file')->latest()->paginate(9);
@@ -28,9 +25,6 @@ class FileController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(): Response
     {
         $categoryOptions = collect(Categories::cases())->map(fn ($category) => [
@@ -44,7 +38,7 @@ class FileController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @param  \App\Http\Requests\FileUploadRequest|\Illuminate\Http\Request  $request
      */
     public function store(FileUploadRequest $request): RedirectResponse
     {
@@ -68,9 +62,6 @@ class FileController extends Controller
         return to_route('files.index')->with('success', 'Uploaded successfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(File $file): Response
     {
         return Inertia::render('files/show', [
@@ -101,17 +92,11 @@ class FileController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(File $file): Response
     {
         return Inertia::render('files/update');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, File $file): RedirectResponse
     {
         $data = $request->validate([
@@ -136,9 +121,6 @@ class FileController extends Controller
         return to_route('files.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(File $file): RedirectResponse
     {
         $file->delete();
