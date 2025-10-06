@@ -8,7 +8,12 @@ import { useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import React from 'react';
 
-export default function Create({ categoryOptions }) {
+type CategoryOptionsProps = {
+    name: string;
+    value: string;
+};
+
+export default function Create({ categoryOptions }: { categoryOptions: CategoryOptionsProps }) {
     const { data, setData, post, errors, processing } = useForm<CreateProps>({
         name: '',
         description: '',
