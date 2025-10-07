@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\IsDxfFile;
-use Closure;
+use App\Enums\Categories;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class FileUploadRequest extends FormRequest
 {
@@ -24,11 +24,11 @@ class FileUploadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => ["required","string", "max:50"],
-            "description" => ["nullable", "string", "max:255"],
-            "image" => ["required", "image", "mimes:jpg,jpeg,png", "max:2048"],
-            "amount" => ["required", "numeric", "regex:/^\d+(\.\d{1,2})?$/"],
-           'dxf_file' => [
+            'name' => ['required', 'string', 'max:50'],
+            'description' => ['nullable', 'string', 'max:255'],
+            'image' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
+            'categories' => [Rule::enum(Categories::class)],
+            'dxf_file' => [
                 'required',
                 'file',
                 'max:10240',
@@ -37,7 +37,7 @@ class FileUploadRequest extends FormRequest
                         $fail('The '.$attribute.' must be a DXF file.');
                     }
                 },
-    ],
+            ],
         ];
     }
 }

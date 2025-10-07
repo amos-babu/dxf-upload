@@ -16,7 +16,6 @@ class File extends Model
         'image',
         'categories',
         'dxf_file',
-        'amount',
     ];
 
     protected function casts(): array
