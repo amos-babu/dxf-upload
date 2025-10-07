@@ -12,24 +12,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('files', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->string('image');
-            $table->string('dxf_file');
+        Schema::table('files', function (Blueprint $table) {
             $table->enum('categories', array_column(Categories::cases(), 'value'));
-            $table->decimal('amount', 8, 2);
-            $table->timestamps();
         });
     }
+
+    // DELETE THIS FILE AFTER PULLING REPO FOR TEST PURPOSES
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('files');
+        Schema::table('files', function (Blueprint $table) {
+            //
+        });
     }
 };
