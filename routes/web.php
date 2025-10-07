@@ -13,8 +13,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::resource('files', FileController::class)->only(['show']);
 Route::get('/', [FileController::class, 'index'])->name('files.index');
-Route::get('/image/{file}/download/', [ImageDownload::class])->name('image.download');
-Route::get('/dxf/{file}/download/', [FileDownload::class])->name('dxf.download');
+// Route::get('/image/{file}/download/', [ImageDownload::class])->name('image.download');
+// Route::get('/dxf/{file}/download/', [FileDownload::class])->name('dxf.download');
 // ->middleware(AdminMiddleware::class)
 Route::fallback(function () {
     return Inertia::render('notfound');
