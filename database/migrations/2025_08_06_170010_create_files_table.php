@@ -19,7 +19,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('image');
             $table->string('dxf_file');
-            $table->enum('categories', array_column(Categories::cases(), 'value'));
+
+            $table->enum('category', array_column(Categories::cases(), 'value'));
             $table->decimal('amount', 8, 2);
             $table->timestamps();
         });

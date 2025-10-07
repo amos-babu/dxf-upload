@@ -14,14 +14,14 @@ class File extends Model
         'name',
         'description',
         'image',
-        'categories',
+        'category',
         'dxf_file',
     ];
 
     protected function casts(): array
     {
         return [
-            'categories' => Categories::class,
+            'category' => Categories::class,
         ];
     }
 

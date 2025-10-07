@@ -26,8 +26,8 @@ class FileUploadRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:50'],
             'description' => ['nullable', 'string', 'max:255'],
-            'image' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
-            'categories' => [Rule::enum(Categories::class)],
+            'image' => ['required', 'image', 'mimes:jpg,jpeg,png,bmp', 'max:2048'],
+            'category' => ['required', Rule::enum(Categories::class)],
             'dxf_file' => [
                 'required',
                 'file',

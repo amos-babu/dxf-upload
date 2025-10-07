@@ -23,4 +23,5 @@ yarn-error.log
 /.vscode
 /.zed
 composer.json
-vite.config.ts
+/vite.config.ts
+/database/migrations/2025_10_07_100701_add_category_column_to_file_table.php

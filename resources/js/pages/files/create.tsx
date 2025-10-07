@@ -1,23 +1,19 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
-import { BreadcrumbItem, CreateProps } from '@/types';
+import { BreadcrumbItem, CategoryOptionsProps, CreateProps } from '@/types';
 import { useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import React from 'react';
 
-type CategoryOptionsProps = {
-    name: string;
-    value: string;
-};
-
-export default function Create({ categoryOptions }: { categoryOptions: CategoryOptionsProps }) {
+export default function Create({ categoryOptions }: { categoryOptions: CategoryOptionsProps[] }) {
     const { data, setData, post, errors, processing } = useForm<CreateProps>({
         name: '',
         description: '',
-        amount: null,
+        category: '',
         image: null,
         dxf_file: null,
     });
@@ -64,18 +60,25 @@ export default function Create({ categoryOptions }: { categoryOptions: CategoryO
                         <p className="font-sans text-sm text-red-600">{errors.description}</p>
                     </div>
                     <div className="px-6 py-3">
-                        <Label htmlFor="name">Price</Label>
-                        <Input
-                            value={data.amount ?? ''}
-                            onChange={(e) => setData('amount', e.target.valueAsNumber)}
-                            onBlur={() => setData('amount', Number((data.amount ?? 0).toFixed(2)))}
-                            name="amount"
-                            type="number"
-                            step="0.01"
-                            placeholder="Price"
-                            className="mt-3"
-                        />
-                        <p className="font-sans text-sm text-red-600">{errors.amount}</p>
+                        <Label htmlFor="name">Category</Label>
+                        <div className="mt-3">
+                            <Select value={data.category} onValueChange={(value) => setData('category', value)}>
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Select a category" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectLabel>Category</SelectLabel>
+                                        {categoryOptions.map((category) => (
+                                            <SelectItem key={category.value} value={category.value}>
+                                                {category.name}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <p className="font-sans text-sm text-red-600">{errors.category}</p>
                     </div>
                     <div className="px-6 py-3">
                         <Label htmlFor="name">File Image</Label>

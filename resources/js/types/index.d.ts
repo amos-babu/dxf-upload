@@ -42,10 +42,15 @@ export interface User {
     [key: string]: unknown;
 }
 
+export type CategoryOptionsProps = {
+    name: string;
+    value: string;
+};
+
 export type CreateProps = {
     name: string;
     description: string;
-    amount: number | null;
+    category: string;
     image: File | null;
     dxf_file: File | null;
 };
