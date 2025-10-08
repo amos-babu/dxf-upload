@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('image');
             $table->string('dxf_file');
             $table->enum('category', array_column(Categories::cases(), 'value'));
-            $table->decimal('amount', 8, 2);
             $table->timestamps();
         });
     }
