@@ -97,6 +97,11 @@ class FileController extends Controller
         return Inertia::render('files/update');
     }
 
+    public function search(Request $request)
+    {
+        $name = $request->query('name');
+    }
+
     public function update(Request $request, File $file): RedirectResponse
     {
         $data = $request->validate([

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->dropColumn('amount');
         });
     }
-
+// DELETE THIS FILE AFTER PULLING REPO FOR TEST PURPOSES
     /**
      * Reverse the migrations.
      */
