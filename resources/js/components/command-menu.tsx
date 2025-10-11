@@ -2,6 +2,7 @@ import { Search } from 'lucide-react';
 import React, { useState } from 'react';
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from './search-cmdk';
 import { Button } from './ui/button';
+import { Kbd, KbdGroup } from './ui/kbd';
 
 export function CommandMenu() {
     const [open, setOpen] = useState(false);
@@ -25,14 +26,18 @@ export function CommandMenu() {
                 className="hidden w-96 cursor-pointer items-center justify-between gap-2 rounded-md border-1 border-primary bg-gray-100 px-2 md:flex dark:bg-neutral-700"
             >
                 <p className="m-2 text-sm text-primary dark:text-gray-200">Search for files ...</p>
-                <div className="flex gap-1">
+                <KbdGroup>
+                    <Kbd color="text-primary">Ctrl</Kbd>
+                    <Kbd>K</Kbd>
+                </KbdGroup>
+                {/* <div className="flex gap-1">
                     <div className="rounded-sm border border-gray-300 bg-primary px-3 dark:border-neutral-500 dark:bg-neutral-500">
                         <p className="text-sm text-gray-100 dark:text-gray-200">Ctrl</p>
                     </div>
                     <div className="rounded-sm border border-gray-300 bg-primary px-3 dark:border-neutral-500 dark:bg-neutral-500">
                         <p className="text-sm text-gray-100 dark:text-gray-200">K</p>
                     </div>
-                </div>
+                </div> */}
             </div>
             <Button onClick={() => setOpen(true)} variant="ghost" size="icon" className="group h-9 w-9 cursor-pointer lg:hidden">
                 <Search className="!size-5 opacity-80 group-hover:opacity-100" />
