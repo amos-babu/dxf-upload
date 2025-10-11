@@ -27,7 +27,7 @@ export function CommandMenu() {
             >
                 <p className="m-2 text-sm text-primary dark:text-gray-200">Search for files ...</p>
                 <KbdGroup>
-                    <Kbd color="text-primary">Ctrl</Kbd>
+                    <Kbd color="bg-primary">Ctrl</Kbd>
                     <Kbd>K</Kbd>
                 </KbdGroup>
                 {/* <div className="flex gap-1">
@@ -42,7 +42,7 @@ export function CommandMenu() {
             <Button onClick={() => setOpen(true)} variant="ghost" size="icon" className="group h-9 w-9 cursor-pointer lg:hidden">
                 <Search className="!size-5 opacity-80 group-hover:opacity-100" />
             </Button>
-            <CommandDialog open={open} onOpenChange={setOpen} className="w-screen border-4 border-primary">
+            <CommandDialog open={open} onOpenChange={setOpen} className="w-1/2">
                 <CommandInput autoFocus placeholder="Type a command or search..." />
                 <CommandList>
                     <CommandEmpty>No results found.</CommandEmpty>
