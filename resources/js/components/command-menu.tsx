@@ -1,10 +1,10 @@
 import { Search } from 'lucide-react';
-import React from 'react';
+import React, { useState } from 'react';
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from './search-cmdk';
 import { Button } from './ui/button';
 
 export function CommandMenu() {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     React.useEffect(() => {
         const down = (e: KeyboardEvent) => {
@@ -47,7 +47,7 @@ export function CommandMenu() {
                         <CommandItem>Calculator</CommandItem>
                         <CommandItem>Calculator</CommandItem>
                         <CommandItem>Calculator</CommandItem>
-                        <CommandItem>Calculator</CommandItem>
+                        <CommandItem>time</CommandItem>
                         <CommandItem>Hello</CommandItem>
                     </CommandGroup>
                 </CommandList>
