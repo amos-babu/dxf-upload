@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FileDownload;
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\ImageDownload;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,7 @@ Route::resource('files', FileController::class)->only(['show']);
 Route::get('/', [FileController::class, 'index'])->name('files.index');
 Route::get('/image/{file}/download/', ImageDownload::class)->name('image.download');
 Route::get('/dxf/{file}/download/', FileDownload::class)->name('dxf.download');
+// Route::get('/dxf/file/', FileUploadController::class)->name('dxf.upload');
 // ->middleware(AdminMiddleware::class)
 Route::fallback(function () {
     return Inertia::render('notfound');
