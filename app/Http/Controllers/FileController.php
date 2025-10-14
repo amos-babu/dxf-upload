@@ -19,11 +19,11 @@ class FileController extends Controller
     public function index(Request $request): Response
     {
         $searchResults = File::search($request->query('q'))->get();
-        $files = File::select('id', 'name', 'image', 'dxf_file')->latest()->paginate(9);
+        // $files = File::select('id', 'name', 'image', 'dxf_file')->latest()->paginate(9);
+        $files = File::with('media')->latest()->paginate(9);
 
         return Inertia::render('dashboard', [
             'files' => FileResource::collection($files),
-            // 'example' => File::getMedia("*"),
         ]);
     }
 
