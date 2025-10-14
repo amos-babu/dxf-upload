@@ -44,35 +44,21 @@ class FileController extends Controller
      */
     public function store(FileUploadRequest $request): RedirectResponse
     {
-        // $data = $request->validated();
-        // $data['user_id'] = Auth::id();
-
-        // if ($request->hasFile('image')) {
-        //     $filePath = $request->file('image')->store('images', 'public');
-        //     $data['image'] = $filePath;
-        // }
-
-        // if ($request->hasFile('dxf_file')) {
-        //     $dxfFile = $request->file('dxf_file');
-        //     $dxfFileName = time().'.dxf';
-        //     $filePath = $dxfFile->storeAs('dxf_files', $dxfFileName, 'private');
-        //     $data['dxf_file'] = $filePath;
-        // }
-
-        // File::create($data);
-
-        // return to_route('files.index')->with('success', 'Uploaded successfully');
-
         $data = $request->validated();
         $data['user_id'] = Auth::id();
+
         $file = File::create($data);
 
         if ($request->hasFile('dxf_file')) {
-            $file->addMedia($request->file('dxf_file'))->toMediaCollection('dxf_files', 'private');
+            $file->addMediaFromRequest('dxf_file')
+                ->usingName($file->name)
+                ->toMediaCollection('dxf-files', 'private');
         }
 
         if ($request->hasFile('image')) {
-            $file->addMedia($request->file('image'))->toMediaCollection('images');
+            $file->addMediaFromRequest('image')
+                ->usingName($file->name)
+                ->toMediaCollection('dxf-images');
         }
 
         return to_route('files.index')->with('success', 'Uploaded successfully');
