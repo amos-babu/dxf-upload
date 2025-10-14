@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Searchable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class File extends Model implements HasMedia
 {
@@ -37,6 +38,33 @@ class File extends Model implements HasMedia
             'description' => $this->description,
             'category' => $this->category,
         ];
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('dxf-images')
+            ->useDisk('public');
+
+        $this
+            ->addMediaCollection('dxf-files2')
+            ->useDisk('private');
+    }
+
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('thumb')
+            ->width(368)
+            ->height(232)
+            ->sharpen(10)
+            ->nonQueued();
+
+    }
+
+    public function getPath(Media $media): string
+    {
+        return "{$media->collection_name}/{$media->model->id}";
     }
 
     public function user(): BelongsTo
