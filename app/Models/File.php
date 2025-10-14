@@ -19,9 +19,7 @@ class File extends Model implements HasMedia
         'user_id',
         'name',
         'description',
-        'image',
         'category',
-        'dxf_file',
     ];
 
     protected function casts(): array
@@ -47,7 +45,7 @@ class File extends Model implements HasMedia
             ->useDisk('public');
 
         $this
-            ->addMediaCollection('dxf-files2')
+            ->addMediaCollection('dxf-files')
             ->useDisk('private');
     }
 
@@ -55,17 +53,17 @@ class File extends Model implements HasMedia
     {
         $this
             ->addMediaConversion('thumb')
-            ->width(368)
-            ->height(232)
+            ->width(232)
+            ->height(368)
             ->sharpen(10)
             ->nonQueued();
 
     }
 
-    public function getPath(Media $media): string
-    {
-        return "{$media->collection_name}/{$media->model->id}";
-    }
+    // public function getPath(Media $media): string
+    // {
+    //     return "{$media->collection_name}/{$media->model->id}";
+    // }
 
     public function user(): BelongsTo
     {

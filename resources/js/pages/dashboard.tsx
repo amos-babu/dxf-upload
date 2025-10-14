@@ -13,9 +13,9 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function Dashboard({ files, example }: { files: FileProps; example: any }) {
+export default function Dashboard({ files }: { files: FileProps }) {
     const { flash } = usePage<FlashProps>().props;
-    console.log(example);
+    console.log(files);
 
     useEffect(() => {
         if (flash.success) toast.success(flash.success);

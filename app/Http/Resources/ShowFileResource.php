@@ -4,7 +4,6 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
 class ShowFileResource extends JsonResource
 {
@@ -16,12 +15,12 @@ class ShowFileResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id" => $this->id,
-            "name" => $this->name,
-            "description" => $this->description,
-            "image" => url(Storage::url($this->image)),
-            "dxfFile" => url(Storage::url($this->dxf_file)),
-            "createdAt" => $this->created_at->diffForHumans()
+            'id' => $this->id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'image' => $this->getFirstMediaUrl('dxf-images'),
+            'dxfFile' => $this->getFirstMediaUrl('dxf-files'),
+            'createdAt' => $this->created_at->diffForHumans(),
         ];
     }
 }
