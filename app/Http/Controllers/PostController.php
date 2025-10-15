@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Categories;
-use App\Http\Requests\FileUploadRequest;
-use App\Http\Resources\FileResource;
+use App\Http\Requests\PostUploadRequest;
+use App\Http\Resources\PostResource;
 use App\Http\Resources\ShowFileResource;
 use App\Models\File;
+use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,16 +15,16 @@ use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class FileController extends Controller
+class PostController extends Controller
 {
     public function index(Request $request): Response
     {
-        $searchResults = File::search($request->query('q'))->get();
+        $searchResults = Post::search($request->query('q'))->get();
         // $files = File::select('id', 'name', 'image', 'dxf_file')->latest()->paginate(9);
-        $files = File::with('media')->latest()->paginate(9);
+        $files = Post::with('media')->latest()->paginate(9);
 
         return Inertia::render('dashboard', [
-            'files' => FileResource::collection($files),
+            'files' => PostResource::collection($files),
         ]);
     }
 
@@ -40,14 +41,14 @@ class FileController extends Controller
     }
 
     /**
-     * @param  \App\Http\Requests\FileUploadRequest|\Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\PostUploadRequest|\Illuminate\Http\Request  $request
      */
-    public function store(FileUploadRequest $request): RedirectResponse
+    public function store(PostUploadRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $data['user_id'] = Auth::id();
 
-        $file = File::create($data);
+        $file = Post::create($data);
 
         if ($request->hasFile('dxf_file')) {
             $file->addMediaFromRequest('dxf_file')
@@ -64,14 +65,14 @@ class FileController extends Controller
         return to_route('files.index')->with('success', 'Uploaded successfully');
     }
 
-    public function show(File $file): Response
+    public function show(Post $file): Response
     {
         return Inertia::render('files/show', [
             'file' => new ShowFileResource($file),
         ]);
     }
 
-    public function imageDownload(File $file)
+    public function imageDownload(Post $file)
     {
         $path = Storage::disk('public')->path($file->image);
 
@@ -82,7 +83,7 @@ class FileController extends Controller
         return response()->download($path, $file->original_name);
     }
 
-    public function dxfDownload(File $file)
+    public function dxfDownload(Post $file)
     {
         $path = Storage::disk('private')->path($file->dxf_file);
 
@@ -94,7 +95,7 @@ class FileController extends Controller
 
     }
 
-    public function edit(File $file): Response
+    public function edit(Post $file): Response
     {
         return Inertia::render('files/update');
     }
@@ -104,7 +105,7 @@ class FileController extends Controller
         $name = $request->query('name');
     }
 
-    public function update(Request $request, File $file): RedirectResponse
+    public function update(Request $request, Post $file): RedirectResponse
     {
         $data = $request->validate([
             'name' => ['nullable'],
@@ -128,7 +129,7 @@ class FileController extends Controller
         return to_route('files.index');
     }
 
-    public function destroy(File $file): RedirectResponse
+    public function destroy(Post $file): RedirectResponse
     {
         $file->delete();
 

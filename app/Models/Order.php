@@ -29,6 +29,6 @@ class Order extends Model
 
     public function file(): BelongsTo
     {
-        return $this->belongsTo(File::class);
+        return $this->belongsTo(Post::class);
     }
 }

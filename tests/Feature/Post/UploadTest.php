@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\File;
+use App\Models\Post;
 use App\Models\User;
 
 uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
@@ -13,7 +13,7 @@ test('files url displays', function () {
 
 // test('shows multiple files for users', function () {
 //     $user = User::factory()->create();
-//     $files = File::factory()->count(3)->for($user)->create();
+//     $files = Post::factory()->count(3)->for($user)->create();
 //     dd($files);
 
 //     $this->actingAs($user)

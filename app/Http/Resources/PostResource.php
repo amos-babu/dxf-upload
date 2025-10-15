@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FileResource extends JsonResource
+class PostResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,7 +17,7 @@ class FileResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'image' => $this->getFirstMediaUrl('dxf-images', 'thumb'),
+            'image' => $this->getFirstMediaUrl('dxf-images', 'medium'),
             'dxf_file' => $this->getFirstMediaUrl('dxf-files'),
         ];
         // 'image' => url(Storage::url($this->image)),

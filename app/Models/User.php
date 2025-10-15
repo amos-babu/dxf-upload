@@ -24,7 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'
+        'role',
     ];
 
     /**
@@ -47,19 +47,22 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'role' => UserRole::class
+            'role' => UserRole::class,
         ];
     }
 
-    public function files(): HasMany {
-        return $this->hasMany(File::class);
+    public function files(): HasMany
+    {
+        return $this->hasMany(Post::class);
     }
 
-    public function orders(): HasMany {
+    public function orders(): HasMany
+    {
         return $this->hasMany(Order::class);
     }
 
-    public function isAdmin(): bool {
+    public function isAdmin(): bool
+    {
         return $this->role === UserRole::ADMIN->value;
     }
 }
