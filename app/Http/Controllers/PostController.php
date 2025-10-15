@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\Categories;
 use App\Http\Requests\PostUploadRequest;
 use App\Http\Resources\PostResource;
-use App\Http\Resources\ShowFileResource;
+use App\Http\Resources\ShowPostResource;
 use App\Models\File;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
@@ -68,7 +68,8 @@ class PostController extends Controller
     public function show(Post $file): Response
     {
         return Inertia::render('files/show', [
-            'file' => new ShowFileResource($file),
+            'file' => new ShowPostResource($file),
+
         ]);
     }
 
