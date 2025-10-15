@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 function Pagination({ links }: { links: LinksProps }) {
     return (
-        <div className="mt-10 flex justify-center gap-10">
+        <div className="flex justify-center gap-6">
             {links.prev ? (
                 <div className="flex cursor-pointer gap-3 hover:text-primary">
                     <ChevronLeft className="h-5 w-5 self-center" />

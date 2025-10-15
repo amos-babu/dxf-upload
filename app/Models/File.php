@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Searchable;
+use Spatie\Image\Enums\Fit;
+// use Spatie\MediaLibrary\Conversions\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -53,17 +55,16 @@ class File extends Model implements HasMedia
     {
         $this
             ->addMediaConversion('thumb')
-            ->width(232)
-            ->height(368)
-            ->sharpen(10)
+            ->fit(Fit::Contain, 600, 600)
+            ->performOnCollections('dxf-images')
             ->nonQueued();
 
-    }
+        $this
+            ->addMediaConversion('medium')
+            ->fit(Fit::Contain, 1200, 1200)
+            ->performOnCollections('dxf-images');
 
-    // public function getPath(Media $media): string
-    // {
-    //     return "{$media->collection_name}/{$media->model->id}";
-    // }
+    }
 
     public function user(): BelongsTo
     {

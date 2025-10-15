@@ -30,9 +30,10 @@ export default function Dashboard({ files }: { files: FileProps }) {
                     <Suspense fallback={<h4 className="text-center">Loading ...</h4>}>
                         <DisplayFiles items={files.data} />
                     </Suspense>
-                    {/* <DisplayFiles items={files.data} /> */}
                 </div>
-                <Pagination links={files.links} />
+                <div className="bottom-0">
+                    <Pagination links={files.links} />
+                </div>
             </div>
         </AppLayout>
     );
