@@ -6,7 +6,6 @@ use App\Enums\Categories;
 use App\Http\Requests\PostUploadRequest;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\ShowPostResource;
-use App\Models\File;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -21,10 +20,10 @@ class PostController extends Controller
     {
         $searchResults = Post::search($request->query('q'))->get();
         // $files = File::select('id', 'name', 'image', 'dxf_file')->latest()->paginate(9);
-        $files = Post::with('media')->latest()->paginate(9);
+        $posts = Post::with('media')->latest()->paginate(9);
 
         return Inertia::render('dashboard', [
-            'files' => PostResource::collection($files),
+            'files' => PostResource::collection($posts),
         ]);
     }
 
@@ -48,55 +47,55 @@ class PostController extends Controller
         $data = $request->validated();
         $data['user_id'] = Auth::id();
 
-        $file = Post::create($data);
+        $post = Post::create($data);
 
         if ($request->hasFile('dxf_file')) {
-            $file->addMediaFromRequest('dxf_file')
-                ->usingName($file->name)
+            $post->addMediaFromRequest('dxf_file')
+                ->usingName($post->name)
                 ->toMediaCollection('dxf-files', 'private');
         }
 
         if ($request->hasFile('image')) {
-            $file->addMediaFromRequest('image')
-                ->usingName($file->name)
+            $post->addMediaFromRequest('image')
+                ->usingName($post->name)
                 ->toMediaCollection('dxf-images');
         }
 
         return to_route('files.index')->with('success', 'Uploaded successfully');
     }
 
-    public function show(Post $file): Response
+    public function show(Post $post): Response
     {
         return Inertia::render('files/show', [
-            'file' => new ShowPostResource($file),
+            'file' => new ShowPostResource($post),
 
         ]);
     }
 
-    public function imageDownload(Post $file)
+    public function imageDownload(Post $post)
     {
-        $path = Storage::disk('public')->path($file->image);
+        $path = Storage::disk('public')->path($post->image);
 
         if (! file_exists($path)) {
             abort(404, 'File not found.');
         }
 
-        return response()->download($path, $file->original_name);
+        return response()->download($path, $post->original_name);
     }
 
-    public function dxfDownload(Post $file)
+    public function dxfDownload(Post $post)
     {
-        $path = Storage::disk('private')->path($file->dxf_file);
+        $path = Storage::disk('private')->path($post->dxf_file);
 
         if (! file_exists($path)) {
             abort(404, 'File not found.');
         }
 
-        return response()->download($path, $file->original_name);
+        return response()->download($path, $post->original_name);
 
     }
 
-    public function edit(Post $file): Response
+    public function edit(Post $post): Response
     {
         return Inertia::render('files/update');
     }
@@ -106,7 +105,7 @@ class PostController extends Controller
         $name = $request->query('name');
     }
 
-    public function update(Request $request, Post $file): RedirectResponse
+    public function update(Request $request, Post $post): RedirectResponse
     {
         $data = $request->validate([
             'name' => ['nullable'],
@@ -125,14 +124,14 @@ class PostController extends Controller
             $data['dxf_file'] = $filePath;
         }
 
-        $file->update($data);
+        $post->update($data);
 
         return to_route('files.index');
     }
 
-    public function destroy(Post $file): RedirectResponse
+    public function destroy(Post $post): RedirectResponse
     {
-        $file->delete();
+        $post->delete();
 
         return to_route('files.index');
     }

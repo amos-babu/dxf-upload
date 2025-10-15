@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FileUploadRequest;
-use App\Models\File;
+use App\Http\Requests\PostUploadRequest;
+use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
 class FileUploadController extends Controller
 {
     /**
-     * @param  \App\Http\Requests\FileUploadRequest|\Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\PostUploadRequest|\Illuminate\Http\Request  $request
      */
-    public function __invoke(FileUploadRequest $request)
+    public function __invoke(PostUploadRequest $request)
     {
         $data = $request->validated();
         $data['user_id'] = Auth::id();
@@ -28,7 +28,7 @@ class FileUploadController extends Controller
             $data['dxf_file'] = $filePath;
         }
 
-        File::create($data);
+        Post::create($data);
 
         return to_route('files.index')->with('success', 'Uploaded successfully');
     }
