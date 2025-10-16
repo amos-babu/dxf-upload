@@ -20,7 +20,7 @@ class PostController extends Controller
     {
         $searchResults = Post::search($request->query('q'))->get();
         // $files = File::select('id', 'name', 'image', 'dxf_file')->latest()->paginate(9);
-        $posts = Post::with('media')->latest()->paginate(9);
+        $posts = Post::with('media')->latest()->paginate(12);
 
         return Inertia::render('dashboard', [
             'files' => PostResource::collection($posts),
