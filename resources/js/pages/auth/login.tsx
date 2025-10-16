@@ -102,7 +102,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
 
                 <Button variant={'outline'} type="submit" className="w-full" tabIndex={4} disabled={processing}>
                     <GoogleAppLogoIcon className="mr-2 size-8 fill-current text-white" />
-                    {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
+                    {/* {processing && <LoaderCircle className="h-4 w-4 animate-spin" />} */}
                     Continue with Google
                 </Button>
 
