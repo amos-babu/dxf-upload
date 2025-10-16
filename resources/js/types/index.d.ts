@@ -67,6 +67,7 @@ export interface FileDataProps {
     name: string;
     image: string;
     dxfFile: string;
+    description: string;
 }
 
 export interface ShowFileDataProps {
