@@ -55,7 +55,7 @@ class Post extends Model implements HasMedia
     {
         $this
             ->addMediaConversion('thumb')
-            ->fit(Fit::Contain, 600, 600)
+            ->fit(Fit::Stretch, 300, 300)
             ->performOnCollections('dxf-images')
             ->nonQueued();
 

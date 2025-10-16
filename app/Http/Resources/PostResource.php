@@ -17,7 +17,7 @@ class PostResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'image' => $this->getFirstMediaUrl('dxf-images'),
+            'image' => $this->getFirstMediaUrl('dxf-images', 'thumb'),
             'dxf_file' => $this->getFirstMediaUrl('dxf-files'),
         ];
         // 'image' => url(Storage::url($this->image)),
