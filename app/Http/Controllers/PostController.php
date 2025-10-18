@@ -22,7 +22,7 @@ class PostController extends Controller
         $posts = Post::with('media')->latest()->paginate(12);
 
         return Inertia::render('dashboard', [
-            'files' => PostResource::collection($posts),
+            'posts' => PostResource::collection($posts),
         ]);
     }
 
@@ -33,7 +33,7 @@ class PostController extends Controller
             'value' => $category->value,
         ]);
 
-        return Inertia::render('files/create', [
+        return Inertia::render('posts/create', [
             'categoryOptions' => $categoryOptions,
         ]);
     }
@@ -60,13 +60,15 @@ class PostController extends Controller
                 ->toMediaCollection('dxf-images');
         }
 
-        return to_route('files.index')->with('success', 'Uploaded successfully');
+        return to_route('posts.index')->with('success', 'Uploaded successfully');
     }
 
     public function show(Post $post): Response
     {
-        return Inertia::render('files/show', [
-            'file' => new ShowPostResource($post),
+        $post->load('media');
+
+        return Inertia::render('posts/show', [
+            'post' => new ShowPostResource($post),
 
         ]);
     }
@@ -96,7 +98,9 @@ class PostController extends Controller
 
     public function edit(Post $post): Response
     {
-        return Inertia::render('files/update');
+        return Inertia::render('posts/update', [
+            'post' => new ShowPostResource($post),
+        ]);
     }
 
     public function search(Request $request)
@@ -125,13 +129,13 @@ class PostController extends Controller
 
         $post->update($data);
 
-        return to_route('files.index');
+        return to_route('posts.index');
     }
 
     public function destroy(Post $post): RedirectResponse
     {
         $post->delete();
 
-        return to_route('files.index');
+        return to_route('posts.index');
     }
 }

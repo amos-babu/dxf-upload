@@ -1,28 +1,29 @@
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
 import { BreadcrumbItem, ShowFileDataProps } from '@/types';
 import { HeartIcon, Trash } from 'lucide-react';
 
-export default function Show({ file }: { file: ShowFileDataProps }) {
+export default function Show({ post }: { post: ShowFileDataProps }) {
     const breadcrumbs: BreadcrumbItem[] = [
         {
-            title: 'Show File',
+            title: 'Show Post',
             href: '/create',
         },
     ];
+
+    console.log(post);
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <div className="mt-10 flex w-full flex-col justify-center gap-5 md:flex-row">
                 <figure className="max-w-lg rounded-lg transition-transform duration-300 hover:scale-102 hover:rounded-2xl hover:shadow-lg">
-                    <img className="h-auto max-w-full rounded-md" src={file.data.image} alt={file.data.name} />
+                    <img className="h-auto max-w-full rounded-md" src={post.data.image} alt={post.data.name} />
                 </figure>
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between">
                         <div>
-                            <CardTitle>{file.data.name}</CardTitle>
-                            <CardDescription>{file.data.createdAt}</CardDescription>
+                            <CardTitle>{post.data.name}</CardTitle>
+                            <CardDescription>{post.data.createdAt}</CardDescription>
                         </div>
                         <div className="flex">
                             <div className="cursor-pointer rounded-xl hover:bg-gray-200 dark:hover:bg-gray-50 dark:hover:text-gray-900">
@@ -35,15 +36,15 @@ export default function Show({ file }: { file: ShowFileDataProps }) {
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <p>{file.data.description}</p>
+                        <p>{post.data.description}</p>
                     </CardContent>
                     <CardFooter className="flex gap-5">
-                        {/* <a href={route('image.download', { file: file.data.id })}>
+                        {/* <a href={route('image.download', { post: post.data.id })}>
                             <Button className="cursor-pointer">Download Image</Button>
                         </a> */}
-                        <a href={route('dxf.download', { file: file.data.id })}>
+                        {/* <a href={route('dxf.download', { post: post.data.id })}>
                             <Button className="cursor-pointer">Download Dxf</Button>
-                        </a>
+                        </a> */}
                     </CardFooter>
                 </Card>
             </div>

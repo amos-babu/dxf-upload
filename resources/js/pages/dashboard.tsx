@@ -13,7 +13,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function Dashboard({ files }: { files: FileProps }) {
+export default function Dashboard({ posts }: { posts: FileProps }) {
     const { flash } = usePage<FlashProps>().props;
 
     useEffect(() => {
@@ -27,11 +27,11 @@ export default function Dashboard({ files }: { files: FileProps }) {
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
                 <div className="grid auto-rows-min justify-center gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
                     <Suspense fallback={<h4 className="text-center">Loading ...</h4>}>
-                        <DisplayFiles items={files.data} />
+                        <DisplayFiles posts={posts.data} />
                     </Suspense>
                 </div>
                 <div className="bottom-0">
-                    <PaginationLinks links={files.links} meta={files.meta} />
+                    <PaginationLinks links={posts.links} meta={posts.meta} />
                 </div>
             </div>
         </AppLayout>

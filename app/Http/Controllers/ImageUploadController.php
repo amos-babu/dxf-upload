@@ -30,6 +30,6 @@ class FileUploadController extends Controller
 
         Post::create($data);
 
-        return to_route('files.index')->with('success', 'Uploaded successfully');
+        return to_route('posts.index')->with('success', 'Uploaded successfully');
     }
 }

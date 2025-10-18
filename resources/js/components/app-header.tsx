@@ -25,7 +25,7 @@ const mainNavItems: NavItem[] = [
 
     {
         title: 'Upload File',
-        href: '/files/create',
+        href: '/posts/create',
         icon: Upload,
     },
 ];

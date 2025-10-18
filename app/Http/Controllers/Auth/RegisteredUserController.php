@@ -46,6 +46,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect()->intended(route('files.index', absolute: false));
+        return redirect()->intended(route('posts.index', absolute: false));
     }
 }

@@ -22,7 +22,7 @@ test('password can be confirmed', function () {
         'password' => 'password',
     ]);
 
-    $response->assertRedirect(route('files.index', absolute: false));
+    $response->assertRedirect(route('posts.index', absolute: false));
     $response->assertSessionHasNoErrors();
 });
 

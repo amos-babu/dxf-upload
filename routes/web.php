@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::resource('files', PostController::class)->except(['index', 'show']);
+    Route::resource('posts', PostController::class)->except(['index', 'show']);
 });
 
-Route::resource('files', PostController::class)->only(['show']);
-Route::get('/', [PostController::class, 'index'])->name('files.index');
-Route::get('/image/{file}/download/', ImageDownload::class)->name('image.download');
-Route::get('/dxf/{file}/download/', FileDownload::class)->name('dxf.download');
+Route::resource('posts', PostController::class)->only(['show']);
+Route::get('/', [PostController::class, 'index'])->name('posts.index');
+Route::get('/image/{post}/download/', ImageDownload::class)->name('image.download');
+Route::get('/dxf/{post}/download/', FileDownload::class)->name('dxf.download');
 // Route::get('/dxf/file/', FileUploadController::class)->name('dxf.upload');
 // ->middleware(AdminMiddleware::class)
 Route::fallback(function () {
