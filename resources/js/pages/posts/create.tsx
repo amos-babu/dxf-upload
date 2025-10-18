@@ -22,7 +22,7 @@ export default function Create({ categoryOptions }: { categoryOptions: CategoryO
 
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        post('/files');
+        post('/posts');
     };
 
     const breadcrumbs: BreadcrumbItem[] = [
@@ -103,7 +103,7 @@ export default function Create({ categoryOptions }: { categoryOptions: CategoryO
                         <p className="font-sans text-sm text-red-600">{errors.dxf_file}</p>
                     </div>
 
-                    <div className="px-6 pt-3 mb-6">
+                    <div className="mb-6 px-6 pt-3">
                         <Button type="submit" disabled={processing}>
                             {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
                             Submit
