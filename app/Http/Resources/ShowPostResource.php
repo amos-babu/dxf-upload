@@ -20,7 +20,7 @@ class ShowPostResource extends JsonResource
             'description' => $this->description,
             'image' => $this->getFirstMediaUrl('dxf-images'),
             'dxfFile' => $this->getFirstMediaUrl('dxf-files'),
-            'createdAt' => $this->created_at,
+            'createdAt' => $this->created_at->diffForHumans(),
         ];
     }
 }

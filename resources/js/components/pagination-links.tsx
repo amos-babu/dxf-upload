@@ -1,35 +1,45 @@
-import { LinksProps } from '@/types';
-import { Link } from '@inertiajs/react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+} from '@/components/ui/pagination';
+import { LinksProps, MetaProps } from '@/types';
 
-function Pagination({ links }: { links: LinksProps }) {
+export function PaginationLinks({ links, meta }: { links: LinksProps; meta: MetaProps }) {
     return (
-        <div className="flex justify-center gap-6">
-            {links.prev ? (
-                <Link href={links.prev} className="flex cursor-pointer gap-3 hover:text-primary">
-                    <ChevronLeft className="h-5 w-5 self-center" />
-                    <span>Previous</span>
-                </Link>
-            ) : (
-                <div className="flex gap-3 text-muted-foreground">
-                    <ChevronLeft color="gray" className="h-5 w-5 self-center" />
-                    <span>Previous</span>
-                </div>
-            )}
+        <Pagination>
+            <PaginationContent>
+                <PaginationItem>
+                    <PaginationPrevious size="sm" href={links.prev} />
+                </PaginationItem>
 
-            {links.next ? (
-                <Link href={links.next} className="flex cursor-pointer gap-3 hover:text-primary">
-                    <span className="self-center hover:text-primary">Next</span>
-                    <ChevronRight className="h-5 w-5 self-center hover:text-primary" />
-                </Link>
-            ) : (
-                <div className="flex gap-3 text-base text-muted-foreground">
-                    <span>Next</span>
-                    <ChevronRight color="gray" className="h-5 w-5 self-center" />
-                </div>
-            )}
-        </div>
+                {meta.links
+                    ?.filter((link) => link.label !== '&laquo; Previous' && link.label !== 'Next &raquo;')
+                    .map((link, index) => {
+                        const isEllipsis = link.label.includes('...');
+                        return (
+                            <PaginationItem key={index}>
+                                {isEllipsis ? (
+                                    <PaginationEllipsis />
+                                ) : (
+                                    <PaginationLink size="sm" href={link.url || '#'} isActive={link.active}>
+                                        {link.label}
+                                    </PaginationLink>
+                                )}
+                            </PaginationItem>
+                        );
+                    })}
+                <PaginationItem>
+                    <PaginationEllipsis />
+                </PaginationItem>
+                <PaginationItem>
+                    <PaginationNext size="sm" href={links.next} />
+                </PaginationItem>
+            </PaginationContent>
+        </Pagination>
     );
 }
-
-export default Pagination;

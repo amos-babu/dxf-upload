@@ -18,7 +18,7 @@ class PostController extends Controller
 {
     public function index(Request $request): Response
     {
-        $searchResults = Post::search($request->query('q'))->get();
+        // $searchResults = Post::search($request->query('q'))->get();
         $posts = Post::with('media')->latest()->paginate(12);
 
         return Inertia::render('dashboard', [

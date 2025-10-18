@@ -84,20 +84,22 @@ export interface ShowFileDataProps {
 export interface FileProps {
     data: FileDataProps[];
     links: LinksProps;
-    meta: {
-        current_page: number;
-        from: number;
-        last_page: number;
-        links: {
-            active: boolean;
-            label: string;
-            url: string;
-        }[];
-        path: string;
-        per_page: number;
-        to: number;
-        total: number;
-    };
+    meta: MetaProps;
+}
+
+export interface MetaProps {
+    current_page: number;
+    from: number;
+    last_page: number;
+    links: {
+        active: boolean;
+        label: string;
+        url: string;
+    }[];
+    path: string;
+    per_page: number;
+    to: number;
+    total: number;
 }
 
 export interface LinksProps {

@@ -1,5 +1,5 @@
 import DisplayFiles from '@/components/display-files';
-import Pagination from '@/components/pagination-links';
+import { PaginationLinks } from '@/components/pagination-links';
 import AppLayout from '@/layouts/app-layout';
 import { FileProps, FlashProps, type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
@@ -31,7 +31,7 @@ export default function Dashboard({ files }: { files: FileProps }) {
                     </Suspense>
                 </div>
                 <div className="bottom-0">
-                    <Pagination links={files.links} />
+                    <PaginationLinks links={files.links} meta={files.meta} />
                 </div>
             </div>
         </AppLayout>
