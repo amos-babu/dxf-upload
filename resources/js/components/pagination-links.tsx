@@ -16,11 +16,11 @@ export function PaginationLinks({ links, meta }: { links: LinksProps; meta: Meta
             <PaginationContent>
                 <PaginationItem>
                     {links.prev ? (
-                        <Link href={links.prev}>
+                        <Link href={links.prev} className="pagination-link" aria-label="First">
                             <PaginationPrevious size="sm" />
                         </Link>
                     ) : (
-                        <PaginationPrevious className="text-gray-400 hover:bg-primary hover:text-primary-foreground" size="sm" />
+                        <PaginationPrevious className="" size="sm" />
                     )}
                 </PaginationItem>
 
