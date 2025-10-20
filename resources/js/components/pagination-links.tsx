@@ -8,13 +8,20 @@ import {
     PaginationPrevious,
 } from '@/components/ui/pagination';
 import { LinksProps, MetaProps } from '@/types';
+import { Link } from '@inertiajs/react';
 
 export function PaginationLinks({ links, meta }: { links: LinksProps; meta: MetaProps }) {
     return (
         <Pagination>
             <PaginationContent>
                 <PaginationItem>
-                    <PaginationPrevious size="sm" href={links.prev} />
+                    {links.prev ? (
+                        <Link href={links.prev}>
+                            <PaginationPrevious size="sm" />
+                        </Link>
+                    ) : (
+                        <PaginationPrevious className="text-gray-400 hover:bg-primary hover:text-primary-foreground" size="sm" />
+                    )}
                 </PaginationItem>
 
                 {meta.links
