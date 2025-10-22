@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Support\Facades\Storage;
 
 class ImageDownload extends Controller
 {
@@ -12,12 +11,18 @@ class ImageDownload extends Controller
      */
     public function __invoke(Post $post)
     {
-        $path = Storage::disk('public')->path($post->image);
+        $media = $post->getFirstMedia('dxf-images');
+
+        if (! $media) {
+            abort(404, 'File not found.');
+        }
+
+        $path = $media->getPath();
 
         if (! file_exists($path)) {
             abort(404, 'File not found.');
         }
 
-        return response()->download($path, $post->original_name);
+        return response()->download($path, $media->file_name);
     }
 }
