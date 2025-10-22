@@ -34,7 +34,7 @@ export function CommandMenu() {
             <Button onClick={() => setOpen(true)} variant="ghost" size="icon" className="group h-9 w-9 cursor-pointer lg:hidden">
                 <Search className="!size-5 opacity-80 group-hover:opacity-100" />
             </Button>
-            <CommandDialog open={open} onOpenChange={setOpen} className="w-1/2">
+            <CommandDialog  open={open} onOpenChange={setOpen}>
                 <CommandInput autoFocus placeholder="Type a command or search..." />
                 <CommandList>
                     <CommandEmpty>No results found.</CommandEmpty>
