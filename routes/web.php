@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\FileDownload;
-use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\ImageDownload;
 use App\Http\Controllers\PostController;
 use App\Http\Middleware\AdminMiddleware;
@@ -10,14 +9,15 @@ use Inertia\Inertia;
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('posts', PostController::class)->except(['index', 'show']);
+    Route::get('/dxf/{post}/download/', FileDownload::class)->name('dxf.download');
+    Route::get('/image/{post}/download/', ImageDownload::class)->name('image.download');
 });
 
-Route::resource('posts', PostController::class)->only(['show']);
 Route::get('/', [PostController::class, 'index'])->name('posts.index');
-Route::get('/image/{post}/download/', ImageDownload::class)->name('image.download');
-Route::get('/dxf/{post}/download/', FileDownload::class)->name('dxf.download');
-// Route::get('/dxf/file/', FileUploadController::class)->name('dxf.upload');
+Route::resource('posts', PostController::class)->only(['show']);
+
 // ->middleware(AdminMiddleware::class)
+
 Route::fallback(function () {
     return Inertia::render('notfound');
 });
