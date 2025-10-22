@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { ButtonProps, buttonVariants } from "@/components/ui/button"
+import { Link } from "@inertiajs/react"
 
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
   <nav
@@ -35,23 +36,27 @@ const PaginationItem = React.forwardRef<
 PaginationItem.displayName = "PaginationItem"
 
 type PaginationLinkProps = {
+    href?: string
   isActive?: boolean
 } & Pick<ButtonProps, "size"> &
-  React.ComponentProps<"a">
+  Omit<React.ComponentProps<typeof Link>, "href" | "size">
 
 const PaginationLink = ({
   className,
   isActive,
+  href,
   size = "icon",
   ...props
 }: PaginationLinkProps) => (
-  <a
+  <Link
+    href={href || "#"}
     aria-current={isActive ? "page" : undefined}
     className={cn(
       buttonVariants({
         variant: isActive ? "outline" : "ghost",
         size,
-      }), "hover:bg-primary hover:text-primary-foreground",
+      }),
+      "hover:bg-primary hover:text-primary-foreground",
       className
     )}
     {...props}
