@@ -19,7 +19,7 @@ class ShowPostResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'image' => $this->getFirstMediaUrl('dxf-images'),
+            'image' => $this->getFirstMediaUrl('dxf-images', 'preview'),
             'dxfFile' => $this->getFirstMediaUrl('dxf-files'),
             'createdAt' => $this->created_at
                 ? Carbon::parse($this->created_at)->diffForHumans()
