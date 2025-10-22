@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import AppLayout from '@/layouts/app-layout';
 import { BreadcrumbItem, ShowFileDataProps } from '@/types';
-import { HeartIcon, Trash } from 'lucide-react';
+import { HeartIcon } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Show({ post }: { post: ShowFileDataProps }) {
@@ -26,12 +26,14 @@ export default function Show({ post }: { post: ShowFileDataProps }) {
                         <img className="h-auto max-w-full rounded-md" src={post.data.image} alt={post.data.name} onLoad={() => setLoaded(true)} />
                     </figure>
                 </div>
-                <div className="mx-5 flex items-start justify-evenly md:justify-between">
+                <div className="mx-5 flex items-start justify-between md:justify-evenly lg:w-md lg:justify-evenly">
                     <div>
-                        <h2 className="text-lg font-semibold">{post.data.name}</h2>
-                        <p className="text-sm text-gray-500">{post.data.createdAt}</p>
+                        <div className="mb-5">
+                            <h2 className="text-2xl md:text-4xl font-semibold">{post.data.name}</h2>
+                            <p className="text-sm text-gray-500">{post.data.createdAt}</p>
+                        </div>
                         <div>
-                            <p className="text-base text-gray-700">{post.data.description}</p>
+                            <p className="text-lg my-2 text-gray-700">{post.data.description}</p>
                         </div>
                         <div>
                             <a href={route('dxf.download', { post: post.data.id })}>
@@ -40,12 +42,8 @@ export default function Show({ post }: { post: ShowFileDataProps }) {
                         </div>
                     </div>
                     <div className="flex items-end justify-start">
-                        <div className="cursor-pointer rounded-xl hover:bg-gray-200 dark:hover:bg-gray-50 dark:hover:text-gray-900">
+                        <div className="cursor-pointer rounded-full hover:bg-gray-200 hover:shadow-md dark:hover:bg-gray-50 dark:hover:text-gray-900">
                             <HeartIcon className="m-2" />
-                        </div>
-
-                        <div className="cursor-pointer rounded-xl hover:bg-red-600 hover:text-gray-50 dark:hover:text-gray-100">
-                            <Trash className="m-2" />
                         </div>
                     </div>
                 </div>

@@ -31,11 +31,11 @@ const mainNavItems: NavItem[] = [
 ];
 
 const rightNavItems: NavItem[] = [
-    {
-        title: 'Cart',
-        href: '/cart',
-        icon: ShoppingCartIcon,
-    },
+    // {
+    //     title: 'Cart',
+    //     href: '/cart',
+    //     icon: ShoppingCartIcon,
+    // },
 ];
 
 const activeItemStyles = 'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100';
