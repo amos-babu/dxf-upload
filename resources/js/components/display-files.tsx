@@ -9,7 +9,7 @@ export default function DisplayFiles({ posts }: { posts: FileDataProps[] }) {
         <>
             {posts.map((post, idx) => (
                 <Link
-                    className="rounded-xl hover:shadow-md hover:inset-shadow-sm"
+                    className="rounded-xl hover:bg-gray-100 hover:shadow-md hover:inset-shadow-sm"
                     key={`${post.id}-${idx}`}
                     href={route('posts.show', { post: post.id })}
                 >

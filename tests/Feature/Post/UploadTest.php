@@ -1,9 +1,10 @@
 <?php
 
+use App\Enums\Categories;
 use App\Models\Post;
 use App\Models\User;
-use App\Enums\Categories;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 
