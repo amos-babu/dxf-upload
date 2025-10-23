@@ -27,14 +27,14 @@ export function CommandMenu() {
             >
                 <p className="m-2 text-base text-primary dark:text-gray-200">Search for files ...</p>
                 <KbdGroup>
-                    <Kbd className="bg-primary text-white">Ctrl</Kbd>
-                    <Kbd className="bg-primary text-white">K</Kbd>
+                    <Kbd className="bg-primary text-white dark:bg-gray-500 dark:text-gray-200">Ctrl</Kbd>
+                    <Kbd className="bg-primary text-white dark:bg-gray-500 dark:text-gray-200">K</Kbd>
                 </KbdGroup>
             </div>
             <Button onClick={() => setOpen(true)} variant="ghost" size="icon" className="group h-9 w-9 cursor-pointer lg:hidden">
                 <Search className="!size-5 opacity-80 group-hover:opacity-100" />
             </Button>
-            <CommandDialog  open={open} onOpenChange={setOpen}>
+            <CommandDialog open={open} onOpenChange={setOpen}>
                 <CommandInput autoFocus placeholder="Type a command or search..." />
                 <CommandList>
                     <CommandEmpty>No results found.</CommandEmpty>

@@ -9,7 +9,7 @@ export default function DisplayFiles({ posts }: { posts: FileDataProps[] }) {
         <>
             {posts.map((post, idx) => (
                 <Link
-                    className="rounded-xl hover:bg-gray-100 hover:shadow-md hover:inset-shadow-sm"
+                    className="rounded-xl dark:hover:bg-accent hover:shadow-md/30 hover:inset-shadow-sm/30"
                     key={`${post.id}-${idx}`}
                     href={route('posts.show', { post: post.id })}
                 >
@@ -17,7 +17,7 @@ export default function DisplayFiles({ posts }: { posts: FileDataProps[] }) {
                         {!loaded && <Skeleton className="h-[300px] w-[300px] rounded-xl" />}
                         <img className="h-auto max-w-full rounded-2xl p-2" src={post.image} alt={post.name} onLoad={() => setLoaded(true)} />
                     </figure>
-                    <h2 className="pb-2 text-center text-lg font-semibold dark:text-gray-400">
+                    <h2 className="pb-2 text-center text-lg font-semibold dark:text-gray-200">
                         {post.name || <Skeleton className="h-[20px] w-[100px] rounded-md" />}
                     </h2>
                     <h4 className="pb-2 text-center text-base dark:text-gray-400">

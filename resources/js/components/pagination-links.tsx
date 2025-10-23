@@ -16,7 +16,11 @@ export function PaginationLinks({ links, meta }: { links: LinksProps; meta: Meta
                 <PaginationItem>
                     <PaginationPrevious
                         disabled
-                        className={!links.prev ? 'text-muted-foreground hover:bg-white hover:text-muted-foreground' : ''}
+                        className={
+                            !links.prev
+                                ? 'text-muted-foreground hover:bg-white hover:text-muted-foreground dark:hover:bg-gray-600 dark:hover:text-gray-400'
+                                : ''
+                        }
                         href={links.prev}
                         size="sm"
                     />
