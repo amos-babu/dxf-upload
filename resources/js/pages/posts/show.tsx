@@ -42,8 +42,8 @@ export default function Show({ post }: { post: ShowFileDataProps }) {
                         </div>
                     </div>
                     <div className="flex items-end justify-start">
-                        <div className="cursor-pointer rounded-full hover:bg-gray-200 hover:shadow-md dark:hover:bg-gray-50 dark:hover:text-gray-900">
-                            <HeartIcon className="m-2" />
+                        <div className="cursor-pointer rounded-full hover:bg-gray-200 hover:shadow-sm dark:hover:bg-gray-50 dark:hover:text-gray-900">
+                            <HeartIcon className="m-3" />
                         </div>
                     </div>
                 </div>
