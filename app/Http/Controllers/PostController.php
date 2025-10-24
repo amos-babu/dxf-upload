@@ -112,8 +112,10 @@ class PostController extends Controller
             $searchResults = Post::search($query)->get();
         }
 
+        dd($searchResults);
+
         return Inertia::render('dashboard', [
-            'posts' => PostResource::collection($searchResults),
+            'searchResults' => PostResource::collection($searchResults),
             'filters' => ['q' => $query],
             'message' => $searchResults->isEmpty() ? 'No results found.' : null,
         ]);
