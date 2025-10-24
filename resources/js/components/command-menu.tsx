@@ -1,23 +1,11 @@
+import { useHotkeyToggle } from '@/hooks/use-hotkeytoggel';
 import { Search } from 'lucide-react';
-import { useEffect, useState } from 'react';
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from './search-cmdk';
 import { Button } from './ui/button';
 import { Kbd, KbdGroup } from './ui/kbd';
 
 export function CommandMenu() {
-    const [open, setOpen] = useState(false);
-
-    useEffect(() => {
-        const down = (e: KeyboardEvent) => {
-            if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
-                e.preventDefault();
-                setOpen((open) => !open);
-            }
-            if (e.key === 'Escape') setOpen(false);
-        };
-        document.addEventListener('keydown', down);
-        return () => document.removeEventListener('keydown', down);
-    }, []);
+    const [open, setOpen] = useHotkeyToggle(false);
 
     return (
         <>
