@@ -48,7 +48,7 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'flash' => [
-                'success' => fn() => $request->session()->get('success')
+                'success' => fn () => $request->session()->get('success'),
             ],
             'ziggy' => fn (): array => [
                 ...(new Ziggy)->toArray(),

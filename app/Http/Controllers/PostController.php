@@ -105,16 +105,19 @@ class PostController extends Controller
 
     public function search(Request $request)
     {
-        if (! $request->query('name')) {
-            return redirect()->route('posts.index');
-        }
-        $searchResults = Post::search($request->query('name'))->get();
-        if ($searchResults->isEmpty()) {
-            return redirect()->route('posts.index')->with('info', 'No files found matching your search criteria.');
+        $query = $request->query('q');
+        $searchResults = collect();
+
+        if ($query) {
+            $searchResults = Post::search($query)->get();
         }
 
+        dd($searchResults);
+
         return Inertia::render('dashboard', [
-            'posts' => PostResource::collection($searchResults),
+            'searchResults' => PostResource::collection($searchResults),
+            'filters' => ['q' => $query],
+            'message' => $searchResults->isEmpty() ? 'No results found.' : null,
         ]);
     }
 

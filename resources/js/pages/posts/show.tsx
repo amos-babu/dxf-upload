@@ -15,7 +15,7 @@ export default function Show({ post }: { post: ShowFileDataProps }) {
 
     const [loaded, setLoaded] = useState(false);
 
-    console.log(post);
+    // console.log(post);
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -29,11 +29,11 @@ export default function Show({ post }: { post: ShowFileDataProps }) {
                 <div className="mx-5 flex items-start justify-between md:justify-evenly lg:w-md lg:justify-evenly">
                     <div>
                         <div className="mb-5">
-                            <h2 className="text-2xl md:text-4xl font-semibold">{post.data.name}</h2>
+                            <h2 className="text-2xl font-semibold md:text-4xl">{post.data.name}</h2>
                             <p className="text-sm text-gray-500">{post.data.createdAt}</p>
                         </div>
                         <div>
-                            <p className="text-lg my-2 text-gray-700">{post.data.description}</p>
+                            <p className="my-2 text-lg text-gray-700">{post.data.description}</p>
                         </div>
                         <div>
                             <a href={route('dxf.download', { post: post.data.id })}>
