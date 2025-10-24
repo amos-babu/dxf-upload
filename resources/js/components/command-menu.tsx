@@ -1,4 +1,6 @@
 import { useHotkeyToggle } from '@/hooks/use-hotkeytoggel';
+import { useSearch } from '@/hooks/use-search';
+import { usePage } from '@inertiajs/react';
 import { Search } from 'lucide-react';
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from './search-cmdk';
 import { Button } from './ui/button';
@@ -6,7 +8,9 @@ import { Kbd, KbdGroup } from './ui/kbd';
 
 export function CommandMenu() {
     const [open, setOpen] = useHotkeyToggle(false);
-
+    const { searchQuery, handleInputChange } = useSearch();
+    const { props } = usePage();
+    console.log(props);
     return (
         <>
             <div
@@ -23,7 +27,7 @@ export function CommandMenu() {
                 <Search className="!size-5 opacity-80 group-hover:opacity-100" />
             </Button>
             <CommandDialog open={open} onOpenChange={setOpen}>
-                <CommandInput autoFocus placeholder="Type a command or search..." />
+                <CommandInput value={searchQuery} onValueChange={handleInputChange} autoFocus placeholder="Type a command or search..." />
                 <CommandList>
                     <CommandEmpty>No results found.</CommandEmpty>
                     <CommandGroup heading="Suggestions">
