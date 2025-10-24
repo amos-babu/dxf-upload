@@ -1,5 +1,5 @@
 import { Search } from 'lucide-react';
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from './search-cmdk';
 import { Button } from './ui/button';
 import { Kbd, KbdGroup } from './ui/kbd';
@@ -7,7 +7,7 @@ import { Kbd, KbdGroup } from './ui/kbd';
 export function CommandMenu() {
     const [open, setOpen] = useState(false);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const down = (e: KeyboardEvent) => {
             if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
                 e.preventDefault();
