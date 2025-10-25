@@ -18,8 +18,16 @@ class PostController extends Controller
 {
     public function index(Request $request): Response
     {
-        // $searchResults = Post::search($request->query('q'))->get();
-        $posts = Post::with('media')->latest()->paginate(12);
+        $query = $request->query('q');
+        $searchResults = Post::search($query)->get();
+        $posts = Post::query()
+            ->when($query, function ($q) use ($searchResults) {
+                $q->whereIn('id', $searchResults->pluck('id'));
+            })
+            ->with('media')
+            ->latest()
+            ->paginate(12)
+            ->withQueryString();
 
         return Inertia::render('dashboard', [
             'posts' => PostResource::collection($posts),
@@ -109,13 +117,13 @@ class PostController extends Controller
         $searchResults = collect();
 
         if ($query) {
-            $searchResults = Post::search($query)->get();
+            $searchResults = Post::search($query)->paginate(12);
         }
 
-        dd($searchResults);
+        // dd($searchResults);
 
         return Inertia::render('dashboard', [
-            'searchResults' => PostResource::collection($searchResults),
+            'posts' => PostResource::collection($searchResults),
             'filters' => ['q' => $query],
             'message' => $searchResults->isEmpty() ? 'No results found.' : null,
         ]);

@@ -1,3 +1,4 @@
+import { PageProps as InertiaPageProps } from '@inertiajs/core';
 import { LucideIcon } from 'lucide-react';
 import type { Config } from 'ziggy-js';
 
@@ -111,4 +112,8 @@ export interface LinksProps {
 
 export interface DashboardPageProps {
     files: FileProps;
+}
+
+interface SearchFileProps extends InertiaPageProps {
+    posts: FileProps;
 }
