@@ -9,6 +9,8 @@ export function CommandMenu() {
     const [open, setOpen] = useHotkeyToggle(false);
     const { searchQuery, handleInputChange, posts } = useSearch();
 
+    console.log(posts.data);
+
     return (
         <>
             <div

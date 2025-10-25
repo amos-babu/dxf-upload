@@ -1,21 +1,32 @@
 import { SearchFileProps } from '@/types';
 import { router, usePage } from '@inertiajs/react';
-import debounce from 'lodash.debounce';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDebouncedSearch } from './use-debounce';
 
 export const useSearch = (initialQuery = '') => {
-    const { posts } = usePage<SearchFileProps>().props;
+    const { posts } = usePage<SearchFileProps>().props ?? {};
     const [searchQuery, setSearchQuery] = useState(initialQuery);
+    const debouncedSearch = useDebouncedSearch(searchQuery);
 
     const handleInputChange = (value: string) => {
         setSearchQuery(value);
     };
 
     useEffect(() => {
-        if (searchQuery.trim() !== '') {
+        if (debouncedSearch.trim() !== '') {
             router.get(
                 route('files.search'),
-                { q: searchQuery },
+                { q: debouncedSearch },
+                {
+                    preserveState: true,
+                    preserveScroll: true,
+                    replace: true,
+                },
+            );
+        } else {
+            router.get(
+                route('posts.index'),
+                {},
                 {
                     preserveState: true,
                     preserveScroll: true,
@@ -23,7 +34,7 @@ export const useSearch = (initialQuery = '') => {
                 },
             );
         }
-    }, [searchQuery]);
+    }, [debouncedSearch]);
 
     return { searchQuery, handleInputChange, posts };
 };

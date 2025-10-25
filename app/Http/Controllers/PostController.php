@@ -120,8 +120,6 @@ class PostController extends Controller
             $searchResults = Post::search($query)->paginate(12);
         }
 
-        // dd($searchResults);
-
         return Inertia::render('dashboard', [
             'posts' => PostResource::collection($searchResults),
             'filters' => ['q' => $query],
