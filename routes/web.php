@@ -15,7 +15,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::get('/', [PostController::class, 'index'])->name('posts.index');
 Route::resource('posts', PostController::class)->only(['show']);
-Route::get('/search', [PostController::class, 'search'])->name('search');
+Route::get('/search', [PostController::class, 'search'])->name('files.search');
 
 // ->middleware(AdminMiddleware::class)
 

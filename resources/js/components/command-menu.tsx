@@ -1,6 +1,5 @@
 import { useHotkeyToggle } from '@/hooks/use-hotkeytoggel';
 import { useSearch } from '@/hooks/use-search';
-import { usePage } from '@inertiajs/react';
 import { Search } from 'lucide-react';
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from './search-cmdk';
 import { Button } from './ui/button';
@@ -8,9 +7,10 @@ import { Kbd, KbdGroup } from './ui/kbd';
 
 export function CommandMenu() {
     const [open, setOpen] = useHotkeyToggle(false);
-    const { searchQuery, handleInputChange } = useSearch();
-    const { props } = usePage();
-    console.log(props);
+    const { searchQuery, handleInputChange, posts } = useSearch();
+
+    console.log(posts.data);
+
     return (
         <>
             <div
@@ -31,13 +31,9 @@ export function CommandMenu() {
                 <CommandList>
                     <CommandEmpty>No results found.</CommandEmpty>
                     <CommandGroup heading="Suggestions">
-                        <CommandItem>Calendar</CommandItem>
-                        <CommandItem>Search Emoji</CommandItem>
-                        <CommandItem>Calculator</CommandItem>
-                        <CommandItem>Calculator</CommandItem>
-                        <CommandItem>Calculator</CommandItem>
-                        <CommandItem>time</CommandItem>
-                        <CommandItem>Hello</CommandItem>
+                        {posts?.data?.map((file) => (
+                            <CommandItem key={file.id}>{file.name}</CommandItem>
+                        ))}
                     </CommandGroup>
                 </CommandList>
             </CommandDialog>
