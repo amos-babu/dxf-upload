@@ -31,7 +31,7 @@ export const useSearch = (initialQuery = '') => {
                 window.history.replaceState({}, '', route('posts.index'));
             }
         }
-    }, [debouncedSearch]);
+    }, [debouncedSearch, isSearchIndexPage]);
 
     return { searchQuery, handleInputChange, posts };
 };

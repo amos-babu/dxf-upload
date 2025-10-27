@@ -14,9 +14,9 @@ export default function Show({ post }: { post: ShowFileDataProps }) {
     ];
 
     const [loaded, setLoaded] = useState(false);
-    const handleGoBack = () => {
-        window.history.back();
-    };
+    // const handleGoBack = () => {
+    //     window.history.back();
+    // };
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
