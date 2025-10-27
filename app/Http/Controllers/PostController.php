@@ -18,11 +18,12 @@ class PostController extends Controller
 {
     public function index(Request $request): Response
     {
-        $query = $request->query('q');
-        $searchResults = Post::search($query)->get();
+        $query = $request->query('category');
         $posts = Post::query()
-            ->when($query, function ($q) use ($searchResults) {
-                $q->whereIn('id', $searchResults->pluck('id'));
+            ->when($query, function ($q) use ($query) {
+                if (Categories::tryFrom($query)) {
+                    $q->where('category', $query);
+                }
             })
             ->with('media')
             ->latest()
