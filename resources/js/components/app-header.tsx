@@ -14,6 +14,7 @@ import { Link, usePage } from '@inertiajs/react';
 import { LogIn, LucideHome, Menu, Upload } from 'lucide-react';
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
+import { CategoriesSelector } from './categories-selector';
 import { CommandMenu } from './command-menu';
 
 const mainNavItems: NavItem[] = [
@@ -47,7 +48,6 @@ interface AppHeaderProps {
 export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
     const page = usePage<SharedData>();
     const { auth } = page.props;
-    // console.log(auth);
     const getInitials = useInitials();
     return (
         <>
@@ -100,6 +100,10 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                     <Link href="/dashboard" prefetch className="flex items-center space-x-2">
                         <AppLogo />
                     </Link>
+
+                    <div className='mx-4'>
+                        <CategoriesSelector />
+                    </div>
 
                     {/* Desktop Navigation */}
                     <div className="ml-6 hidden h-full items-center space-x-6 lg:flex">
