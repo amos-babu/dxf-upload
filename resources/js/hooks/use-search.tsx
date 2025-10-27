@@ -24,15 +24,7 @@ export const useSearch = (initialQuery = '') => {
                 },
             );
         } else {
-            router.get(
-                route('posts.index'),
-                {},
-                {
-                    preserveState: true,
-                    preserveScroll: true,
-                    replace: true,
-                },
-            );
+            window.history.replaceState({}, '', route('posts.index'));
         }
     }, [debouncedSearch]);
 
