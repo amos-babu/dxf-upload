@@ -20,7 +20,6 @@ interface Props extends PageProps {
 export function CategoriesSelector() {
     const { categories } = usePage<Props>().props ?? {};
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-    console.log(selectedCategory);
 
     useEffect(() => {
         if (!selectedCategory) return;
