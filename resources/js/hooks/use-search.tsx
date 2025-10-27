@@ -12,6 +12,9 @@ export const useSearch = (initialQuery = '') => {
         setSearchQuery(value);
     };
 
+    const { url } = usePage();
+    const isSearchIndexPage = url.startsWith(route('files.search')) || url.startsWith(route('posts.index'));
+
     useEffect(() => {
         if (debouncedSearch.trim() !== '') {
             router.get(
@@ -24,7 +27,9 @@ export const useSearch = (initialQuery = '') => {
                 },
             );
         } else {
-            window.history.replaceState({}, '', route('posts.index'));
+            if (isSearchIndexPage) {
+                window.history.replaceState({}, '', route('posts.index'));
+            }
         }
     }, [debouncedSearch]);
 
