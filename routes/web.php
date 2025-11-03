@@ -3,6 +3,7 @@
 use App\Http\Controllers\FileDownload;
 use App\Http\Controllers\ImageDownload;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UpdateFavorite;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -11,6 +12,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('posts', PostController::class)->except(['index', 'show']);
     Route::get('/dxf/{post}/download/', FileDownload::class)->name('dxf.download');
     Route::get('/image/{post}/download/', ImageDownload::class)->name('image.download');
+    Route::post('/posts/{post}/favorite', UpdateFavorite::class)->name('favorite.update');
 });
 
 Route::get('/', [PostController::class, 'index'])->name('posts.index');

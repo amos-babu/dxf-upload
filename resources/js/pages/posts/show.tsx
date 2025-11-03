@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import AppLayout from '@/layouts/app-layout';
 import { BreadcrumbItem, ShowFileDataProps } from '@/types';
+import { router } from '@inertiajs/react';
 import { HeartIcon } from 'lucide-react';
 import { useState } from 'react';
 
@@ -17,6 +18,10 @@ export default function Show({ post }: { post: ShowFileDataProps }) {
     // const handleGoBack = () => {
     //     window.history.back();
     // };
+
+    const toggleFavorite = () => {
+        router.post(route('favorite.update', { post: post.data.id }), {}, { preserveScroll: true });
+    };
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -44,7 +49,9 @@ export default function Show({ post }: { post: ShowFileDataProps }) {
                     </div>
                     <div className="flex items-end justify-start">
                         <div className="cursor-pointer rounded-full hover:bg-gray-200 hover:shadow-sm dark:hover:bg-gray-50 dark:hover:text-gray-900">
-                            <HeartIcon className="m-3" />
+                            <button onClick={toggleFavorite} className="p-3">
+                                <HeartIcon />
+                            </button>
                         </div>
                     </div>
                 </div>
