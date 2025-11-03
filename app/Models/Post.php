@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\Categories;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Searchable;
 use Spatie\Image\Enums\Fit;
@@ -75,5 +76,10 @@ class Post extends Model implements HasMedia
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function favoritedBy(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
     }
 }

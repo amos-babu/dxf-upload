@@ -22,15 +22,20 @@ export default defineConfig({
             'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
         },
     },
-    optimizeDeps: {
-        exclude: ['react-masonry-css'],
-    },
 
     server: {
-        host: '127.0.0.1',
+        host: '0.0.0.0',
         port: 5173,
         hmr: {
-            host: 'dxf-upload.test',
+            host: '172.26.153.29',
         },
     },
+
+    // server: {
+    //     host: '127.0.0.1',
+    //     port: 5173,
+    //     hmr: {
+    //         host: 'dxf-upload.test',
+    //     },
+    // },
 });
