@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +22,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        RateLimiter::for('favorites', function (Request $request) {
+            return Limit::perMinute(2)
+                ->by(optional($request->user())->id ?? $request->ip())
+                ->response(function () {
+                    return redirect()->back()->withErrors(['favorite' => 'You are marking favorites too quickly. Please slow down.']);
+                });
+        });
     }
 }

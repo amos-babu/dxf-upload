@@ -82,6 +82,9 @@ class PostController extends Controller
         ]);
     }
 
+    //$favorites = auth()->user()->favoriteFiles()->with('media')->get();
+
+
     public function imageDownload(Post $post)
     {
         $path = Storage::disk('public')->path($post->image);
