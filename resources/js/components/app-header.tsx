@@ -11,7 +11,7 @@ import { useInitials } from '@/hooks/use-initials';
 import { cn } from '@/lib/utils';
 import { type BreadcrumbItem, type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { LucideHome, Menu, Upload } from 'lucide-react';
+import { HeartIcon, LucideHome, Menu, Upload } from 'lucide-react';
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
 import { CategoriesSelector } from './categories-selector';
@@ -28,6 +28,12 @@ const mainNavItems: NavItem[] = [
         title: 'Upload File',
         href: '/posts/create',
         icon: Upload,
+    },
+
+    {
+        title: 'Favorites',
+        href: '/favorites',
+        icon: HeartIcon,
     },
 ];
 
@@ -176,7 +182,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                         ) : (
                             <Link
                                 href={route('login')}
-                                className="inline-block rounded-lg px-5 py-1.5 text-base leading-normal text-[#1b1b18] hover:border-[#19140035] hover:bg-gray-100 dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A] dark:hover:bg-neutral-700 font-medium"
+                                className="inline-block rounded-lg px-5 py-1.5 text-base leading-normal font-medium text-[#1b1b18] hover:border-[#19140035] hover:bg-gray-100 dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A] dark:hover:bg-neutral-700"
                             >
                                 Sign In
                             </Link>
