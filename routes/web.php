@@ -8,11 +8,11 @@ use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'throttle:60,1'])->group(function () {
     Route::resource('posts', PostController::class)->except(['index', 'show']);
     Route::get('/dxf/{post}/download/', FileDownload::class)->name('dxf.download');
     Route::get('/image/{post}/download/', ImageDownload::class)->name('image.download');
-    Route::post('/posts/{post}/favorite', UpdateFavorite::class)->name('favorite.update');
+    Route::post('/posts/{post}/favorite', UpdateFavorite::class)->name('favorite.update')->middleware('throttle:favorites');
 });
 
 Route::get('/', [PostController::class, 'index'])->name('posts.index');

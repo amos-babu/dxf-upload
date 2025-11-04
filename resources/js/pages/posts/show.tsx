@@ -2,9 +2,9 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import AppLayout from '@/layouts/app-layout';
 import { BreadcrumbItem, ShowFileDataProps } from '@/types';
-import { router } from '@inertiajs/react';
+import { router, usePage } from '@inertiajs/react';
 import { HeartIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Show({ post }: { post: ShowFileDataProps }) {
     const breadcrumbs: BreadcrumbItem[] = [
@@ -15,6 +15,19 @@ export default function Show({ post }: { post: ShowFileDataProps }) {
     ];
 
     const [loaded, setLoaded] = useState(false);
+    const { errors } = usePage().props;
+    const [message, setMessage] = useState(errors.favorite || null);
+
+    useEffect(() => {
+        if (errors.favorite) {
+            setMessage(errors.favorite);
+            const timer = setTimeout(() => {
+                setMessage(null);
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [errors.favorite]);
+
     // const handleGoBack = () => {
     //     window.history.back();
     // };
@@ -25,6 +38,9 @@ export default function Show({ post }: { post: ShowFileDataProps }) {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
+            <div className="text-center">
+                <p className="text-red-600">{message}</p>
+            </div>
             <div className="my-10 flex w-full flex-col justify-center gap-5 md:flex-row">
                 <div className="flex justify-center">
                     <figure className="max-w-lg rounded-lg transition-transform duration-300 hover:scale-102 hover:rounded-2xl hover:shadow-lg">
@@ -47,7 +63,7 @@ export default function Show({ post }: { post: ShowFileDataProps }) {
                             </a>
                         </div>
                     </div>
-                    <div className="flex items-end justify-start">
+                    <div>
                         <div className="cursor-pointer rounded-full hover:bg-gray-200 hover:shadow-sm dark:hover:bg-gray-50 dark:hover:text-gray-900">
                             <button onClick={toggleFavorite} className="p-3">
                                 <HeartIcon />

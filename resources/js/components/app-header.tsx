@@ -174,31 +174,37 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         ) : (
-                            <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
-                                    <div className="cursor-pointer rounded-md hover:bg-gray-100 dark:hover:bg-neutral-800">
-                                        <div className="flex items-center space-x-2 px-3 py-2 font-medium">
-                                            <span className="text-sm">Sign In</span>
-                                        </div>
-                                    </div>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent className="w-50" align="start">
-                                    <div className="flex flex-col">
-                                        <Link
-                                            href={route('login')}
-                                            className="inline-block rounded-sm px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#19140035] hover:bg-gray-100 dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A] dark:hover:bg-neutral-700"
-                                        >
-                                            Log in
-                                        </Link>
-                                        <Link
-                                            href={route('register')}
-                                            className="inline-block rounded-sm px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] hover:bg-gray-100 dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b] dark:hover:bg-neutral-700"
-                                        >
-                                            Register
-                                        </Link>
-                                    </div>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
+                            <Link
+                                href={route('login')}
+                                className="inline-block rounded-lg px-5 py-1.5 text-base leading-normal text-[#1b1b18] hover:border-[#19140035] hover:bg-gray-100 dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A] dark:hover:bg-neutral-700 font-medium"
+                            >
+                                Sign In
+                            </Link>
+                            // <DropdownMenu>
+                            //     <DropdownMenuTrigger asChild>
+                            //         <div className="cursor-pointer rounded-md hover:bg-gray-100 dark:hover:bg-neutral-800">
+                            //             <div className="flex items-center space-x-2 px-3 py-2 font-medium">
+                            //                 <span className="text-sm">Sign In</span>
+                            //             </div>
+                            //         </div>
+                            //     </DropdownMenuTrigger>
+                            //     <DropdownMenuContent className="w-50" align="start">
+                            //         <div className="flex flex-col">
+                            //             <Link
+                            //                 href={route('login')}
+                            //                 className="inline-block rounded-sm px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#19140035] hover:bg-gray-100 dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A] dark:hover:bg-neutral-700"
+                            //             >
+                            //                 Log in
+                            //             </Link>
+                            //             <Link
+                            //                 href={route('register')}
+                            //                 className="inline-block rounded-sm px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] hover:bg-gray-100 dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b] dark:hover:bg-neutral-700"
+                            //             >
+                            //                 Register
+                            //             </Link>
+                            //         </div>
+                            //     </DropdownMenuContent>
+                            // </DropdownMenu>
                         )}
                     </div>
                 </div>
