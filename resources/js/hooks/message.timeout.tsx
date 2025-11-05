@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export default function useTimeout({ errors }: { errors: any }) {
+export default function useTimeout({ errors }: { errors: { favorite?: string | null } }) {
     const [message, setMessage] = useState(errors.favorite || null);
     useEffect(() => {
         if (errors.favorite) {

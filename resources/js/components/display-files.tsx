@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { Skeleton } from './ui/skeleton';
 
 export default function DisplayFiles({ posts }: { posts: FileDataProps[] }) {
-    const [loaded, setLoaded] = useState(false);
     const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
 
     const handleImageLoad = (id: number) => {
