@@ -15,11 +15,11 @@ class ShowPostResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-
         return [
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'category' => $this->category->label(),
             'image' => $this->getFirstMediaUrl('dxf-images', 'preview'),
             'dxfFile' => $this->getFirstMediaUrl('dxf-files'),
             'createdAt' => $this->created_at

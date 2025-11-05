@@ -79,6 +79,7 @@ export interface ShowFileDataProps {
         image: string;
         dxfFile: string;
         createdAt: string;
+        category: string;
     };
     isFavorite?: boolean;
 }

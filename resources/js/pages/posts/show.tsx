@@ -1,10 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
+import useTimeout from '@/hooks/message.timeout';
 import AppLayout from '@/layouts/app-layout';
 import { BreadcrumbItem, ShowFileDataProps } from '@/types';
 import { router, usePage } from '@inertiajs/react';
 import { HeartIcon } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Show({ post }: { post: ShowFileDataProps }) {
     const breadcrumbs: BreadcrumbItem[] = [
@@ -16,24 +17,22 @@ export default function Show({ post }: { post: ShowFileDataProps }) {
 
     const [loaded, setLoaded] = useState(false);
     const { errors } = usePage().props;
-    const [message, setMessage] = useState(errors.favorite || null);
-
-    useEffect(() => {
-        if (errors.favorite) {
-            setMessage(errors.favorite);
-            const timer = setTimeout(() => {
-                setMessage(null);
-            }, 3000);
-            return () => clearTimeout(timer);
-        }
-    }, [errors.favorite]);
+    const { message } = useTimeout({ errors });
 
     // const handleGoBack = () => {
     //     window.history.back();
     // };
 
     const toggleFavorite = () => {
-        router.post(route('favorite.update', { post: post.data.id }), {}, { preserveScroll: true });
+        router.post(
+            route('favorite.update', {
+                post: post.data.id,
+            }),
+            {},
+            {
+                preserveScroll: true,
+            },
+        );
     };
 
     return (
@@ -52,6 +51,7 @@ export default function Show({ post }: { post: ShowFileDataProps }) {
                     <div>
                         <div className="mb-5">
                             <h2 className="text-2xl font-semibold md:text-4xl">{post.data.name}</h2>
+                            <p className="my-1 text-sm font-semibold md:my-2 md:text-xl">{post.data.category}</p>
                             <p className="text-sm text-gray-500">{post.data.createdAt}</p>
                         </div>
                         <div>
