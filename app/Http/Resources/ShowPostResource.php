@@ -15,6 +15,7 @@ class ShowPostResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -24,6 +25,9 @@ class ShowPostResource extends JsonResource
             'createdAt' => $this->created_at
                 ? Carbon::parse($this->created_at)->diffForHumans()
                 : null,
+            'isFavorite' => $request->user()
+               ? $this->isFavorite
+               : null,
         ];
     }
 }

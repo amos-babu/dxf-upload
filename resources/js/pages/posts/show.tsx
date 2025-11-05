@@ -66,7 +66,7 @@ export default function Show({ post }: { post: ShowFileDataProps }) {
                     <div>
                         <div className="cursor-pointer rounded-full hover:bg-gray-200 hover:shadow-sm dark:hover:bg-gray-50 dark:hover:text-gray-900">
                             <button onClick={toggleFavorite} className="p-3">
-                                <HeartIcon />
+                                {post.isFavorite ? <HeartIcon className="text-gray-700" /> : <HeartIcon className="fill-red-500 stroke-red-500" />}
                             </button>
                         </div>
                     </div>

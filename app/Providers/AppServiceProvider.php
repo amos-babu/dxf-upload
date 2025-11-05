@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         RateLimiter::for('favorites', function (Request $request) {
-            return Limit::perMinute(2)
+            return Limit::perMinute(10)
                 ->by(optional($request->user())->id ?? $request->ip())
                 ->response(function () {
                     return redirect()->back()->withErrors(['favorite' => 'You are marking favorites too quickly. Please slow down.']);
