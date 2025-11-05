@@ -4,7 +4,7 @@ import { PaginationLinks } from '@/components/pagination-links';
 import AppLayout from '@/layouts/app-layout';
 import { FileProps, FlashProps, type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
-import { Suspense, useEffect } from 'react';
+import { useEffect } from 'react';
 import { toast, Toaster } from 'sonner';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -16,6 +16,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 export default function Dashboard({ posts }: { posts: FileProps }) {
     const { flash } = usePage<FlashProps>().props;
+    const hasPosts = posts.data.length > 0;
 
     useEffect(() => {
         if (flash.success) toast.success(flash.success);
@@ -26,17 +27,15 @@ export default function Dashboard({ posts }: { posts: FileProps }) {
             <Head title="Dashboard" />
             <Toaster richColors position="top-center" />
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-                {posts.data.length > 0 ? (
+                {hasPosts ? (
                     <div className="grid auto-rows-min justify-center gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
-                        <Suspense fallback={<h4 className="text-center">Loading ...</h4>}>
-                            <DisplayFiles posts={posts.data} />
-                        </Suspense>
+                        <DisplayFiles posts={posts.data} />
                     </div>
                 ) : (
                     <FilesNotFound message="Upload some files to get started." />
                 )}
 
-                {posts.data.length > 0 && (
+                {hasPosts && (
                     <div className="p-5">
                         <PaginationLinks links={posts.links} meta={posts.meta} />
                     </div>
