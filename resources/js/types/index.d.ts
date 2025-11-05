@@ -80,6 +80,7 @@ export interface ShowFileDataProps {
         dxfFile: string;
         createdAt: string;
     };
+    isFavorite?: boolean;
 }
 
 export interface FileProps {

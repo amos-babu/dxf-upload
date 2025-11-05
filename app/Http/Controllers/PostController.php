@@ -72,18 +72,20 @@ class PostController extends Controller
         return to_route('posts.index')->with('success', 'Uploaded successfully');
     }
 
-    public function show(Post $post): Response
+    public function show(Post $post, Request $request): Response
     {
         $post->load('media');
+        $favoritePosts = $request->user()->favoritePosts;
+        $isFavorite = $favoritePosts->contains($post->id);
 
         return Inertia::render('posts/show', [
-            'post' => new ShowPostResource($post),
-
+            'post' => new ShowPostResource($post)->additional([
+                'isFavorite' => $isFavorite,
+            ]),
         ]);
     }
 
-    //$favorites = auth()->user()->favoriteFiles()->with('media')->get();
-
+    // $favorites = auth()->user()->favoriteFiles()->with('media')->get();
 
     public function imageDownload(Post $post)
     {
