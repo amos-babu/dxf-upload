@@ -29,13 +29,13 @@ export default function DisplayFiles({ posts }: { posts: FileDataProps[] }) {
                     </figure>
                     <h2 className="pb-2 text-center text-lg font-semibold dark:text-gray-200">
                         {!loadedImages.has(post.id) ? (
-                            <Skeleton className="mt-3 h-[20px] w-[100px] rounded-md text-center text-gray-300" />
+                            <Skeleton className="mt-3 h-[20px] w-[300px] rounded-md text-center text-gray-300" />
                         ) : (
                             <p>{post.name}</p>
                         )}
                     </h2>
                     <h4 className="pb-2 text-center text-base dark:text-gray-400">
-                        {!loadedImages.has(post.id) ? <Skeleton className="h-[16px] w-[150px] rounded-md" /> : <p>{post.description}</p>}
+                        {!loadedImages.has(post.id) ? <Skeleton className="h-[20px] w-[200px] rounded-md" /> : <p>{post.description}</p>}
                     </h4>
                 </Link>
             ))}
