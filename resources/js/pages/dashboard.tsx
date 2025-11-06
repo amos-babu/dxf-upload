@@ -18,6 +18,8 @@ export default function Dashboard({ posts }: { posts: FileProps }) {
     const { flash } = usePage<FlashProps>().props;
     const hasPosts = posts.data.length > 0;
 
+    console.log(posts);
+
     useEffect(() => {
         if (flash.success) toast.success(flash.success);
     }, [flash.success]);

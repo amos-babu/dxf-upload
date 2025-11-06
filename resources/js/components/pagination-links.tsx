@@ -25,26 +25,15 @@ export function PaginationLinks({ links, meta }: { links: LinksProps; meta: Meta
                         size="sm"
                     />
                 </PaginationItem>
-
-                {meta.links
-                    ?.filter((link) => link.label !== '&laquo; Previous' && link.label !== 'Next &raquo;')
-                    .map((link, index) => {
-                        const isEllipsis = link.label.includes('...');
-                        return (
-                            <PaginationItem key={index}>
-                                {isEllipsis ? (
-                                    <PaginationEllipsis />
-                                ) : (
-                                    <PaginationLink size="sm" href={link.url || '#'} isActive={link.active}>
-                                        {link.label}
-                                    </PaginationLink>
-                                )}
-                            </PaginationItem>
-                        );
-                    })}
+                <PaginationLink size="sm" href={links.first || '#'}>
+                    {1}
+                </PaginationLink>
                 <PaginationItem>
                     <PaginationEllipsis />
                 </PaginationItem>
+                <PaginationLink size="sm" href={links.last || '#'}>
+                    {1}
+                </PaginationLink>
                 <PaginationItem>
                     <PaginationNext
                         disabled

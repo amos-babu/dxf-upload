@@ -27,7 +27,7 @@ class PostController extends Controller
             })
             ->with('media')
             ->latest()
-            ->paginate(12)
+            ->simplePaginate(12)
             ->withQueryString();
 
         return Inertia::render('dashboard', [
@@ -75,8 +75,12 @@ class PostController extends Controller
     public function show(Post $post, Request $request): Response
     {
         $post->load('media');
-        $favoritePosts = $request->user()->favoritePosts;
-        $isFavorite = $favoritePosts->contains($post->id);
+        $isFavorite = null;
+
+        if ($request->user()) {
+            $favoritePosts = $request->user()->favoritePosts;
+            $isFavorite = $favoritePosts->contains($post->id);
+        }
 
         return Inertia::render('posts/show', [
             'post' => new ShowPostResource($post)->additional([

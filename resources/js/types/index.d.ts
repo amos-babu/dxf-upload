@@ -92,22 +92,23 @@ export interface FileProps {
 
 export interface MetaProps {
     current_page: number;
+    current_page_url: string;
     from: number;
-    last_page: number;
-    links: {
-        active: boolean;
-        label: string;
-        url: string;
-    }[];
+    // last_page: number;
+    // links: {
+    //     active: boolean;
+    //     label: string;
+    //     url: string;
+    // }[];
     path: string;
     per_page: number;
     to: number;
-    total: number;
+    // total: number;
 }
 
 export interface LinksProps {
-    first: string;
-    last: string;
+    first?: string;
+    last?: string;
     next?: string;
     prev?: string;
 }
