@@ -99,20 +99,20 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                 <div>
                     <p className="text-center text-sm text-balance text-muted-foreground">Or</p>
                 </div>
-
-                <Button variant={'outline'} type="submit" className="w-full" tabIndex={4} disabled={processing}>
-                    <GoogleAppLogoIcon className="mr-2 size-8 fill-current text-white" />
-                    {/* {processing && <LoaderCircle className="h-4 w-4 animate-spin" />} */}
-                    Continue with Google
-                </Button>
-
-                <div className="text-center text-sm text-muted-foreground">
-                    Don't have an account?{' '}
-                    <TextLink href={route('register')} tabIndex={5}>
-                        Sign up
-                    </TextLink>
-                </div>
             </form>
+            <Button variant={'outline'} className="w-full" tabIndex={4} asChild>
+                <a href={route('google.login')} className="flex items-center justify-center">
+                    <GoogleAppLogoIcon className="mr-2 size-8 fill-current text-white" />
+                    Continue with Google
+                </a>
+            </Button>
+
+            <div className="text-center text-sm text-muted-foreground">
+                Don't have an account?{' '}
+                <TextLink href={route('register')} tabIndex={5}>
+                    Sign up
+                </TextLink>
+            </div>
 
             {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
         </AuthLayout>
