@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('google_id')->nullable()->unique();
+            // Enable the google_id column
+            // $table->string('google_id')->nullable()->unique();
         });
     }
 
@@ -22,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('google_id');
+            // $table->dropColumn('google_id');
         });
     }
 };
