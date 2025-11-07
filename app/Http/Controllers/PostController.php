@@ -27,7 +27,7 @@ class PostController extends Controller
             })
             ->with('media')
             ->latest()
-            ->simplePaginate(12)
+            ->paginate(12)
             ->withQueryString();
 
         return Inertia::render('dashboard', [

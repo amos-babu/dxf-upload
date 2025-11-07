@@ -1,3 +1,4 @@
+import { LinksProps, MetaProps } from '@/types';
 import {
     Pagination,
     PaginationContent,
@@ -6,8 +7,7 @@ import {
     PaginationLink,
     PaginationNext,
     PaginationPrevious,
-} from '@/components/ui/pagination';
-import { LinksProps, MetaProps } from '@/types';
+} from './ui/pagination';
 
 export function PaginationLinks({ links, meta }: { links: LinksProps; meta: MetaProps }) {
     return (
@@ -25,15 +25,19 @@ export function PaginationLinks({ links, meta }: { links: LinksProps; meta: Meta
                         size="sm"
                     />
                 </PaginationItem>
-                <PaginationLink size="sm" href={links.first || '#'}>
-                    {1}
-                </PaginationLink>
+
+                {meta.links
+                    .filter((link) => link.label !== '&laquo; Previous' && link.label !== 'Next &raquo;')
+                    .map((link) => (
+                        <PaginationLink key={link.label} className={link.active ? 'bg-accent' : ''} size="sm" href={link.url || '#'}>
+                            {link.label}
+                        </PaginationLink>
+                    ))}
+
                 <PaginationItem>
                     <PaginationEllipsis />
                 </PaginationItem>
-                <PaginationLink size="sm" href={links.last || '#'}>
-                    {1}
-                </PaginationLink>
+
                 <PaginationItem>
                     <PaginationNext
                         disabled
@@ -44,5 +48,15 @@ export function PaginationLinks({ links, meta }: { links: LinksProps; meta: Meta
                 </PaginationItem>
             </PaginationContent>
         </Pagination>
+
+        /* {meta.links.length > 3 && (
+                <div>
+                    {meta.links.map((link) => (
+                        <Link key={link.label} href={link.url || '#'} className={link.active ? 'active' : ''}>
+                            {link.label}
+                        </Link>
+                    ))}
+                </div>
+            )} */
     );
 }

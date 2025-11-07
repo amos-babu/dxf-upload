@@ -94,16 +94,16 @@ export interface MetaProps {
     current_page: number;
     current_page_url: string;
     from: number;
-    // last_page: number;
-    // links: {
-    //     active: boolean;
-    //     label: string;
-    //     url: string;
-    // }[];
+    last_page: number;
+    links: {
+        active: boolean;
+        label: string;
+        url: string | null;
+    }[];
     path: string;
     per_page: number;
     to: number;
-    // total: number;
+    total: number;
 }
 
 export interface LinksProps {

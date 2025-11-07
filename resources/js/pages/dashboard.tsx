@@ -18,7 +18,7 @@ export default function Dashboard({ posts }: { posts: FileProps }) {
     const { flash } = usePage<FlashProps>().props;
     const hasPosts = posts.data.length > 0;
 
-    console.log(posts);
+    console.log(posts.meta.links);
 
     useEffect(() => {
         if (flash.success) toast.success(flash.success);
@@ -38,7 +38,7 @@ export default function Dashboard({ posts }: { posts: FileProps }) {
                 )}
 
                 {hasPosts && (
-                    <div className="p-5">
+                    <div className="py-5">
                         <PaginationLinks links={posts.links} meta={posts.meta} />
                     </div>
                 )}
