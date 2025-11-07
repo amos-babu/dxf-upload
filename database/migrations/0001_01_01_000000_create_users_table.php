@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('google_id')->nullable()->unique();
             $table->string('name');
             $table->string('email')->unique();
             $table->enum('role', array_column(UserRole::cases(), 'value'))->default(UserRole::USER->value);
