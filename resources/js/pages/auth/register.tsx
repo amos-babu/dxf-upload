@@ -2,6 +2,7 @@ import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
+import GoogleAppLogoIcon from '@/components/google-icon';
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
@@ -106,14 +107,23 @@ export default function Register() {
                         Create account
                     </Button>
                 </div>
-
-                <div className="text-center text-sm text-muted-foreground">
-                    Already have an account?{' '}
-                    <TextLink href={route('login')} tabIndex={6}>
-                        Log in
-                    </TextLink>
-                </div>
             </form>
+
+            <p className="text-center text-sm text-muted-foreground">Or</p>
+
+            <Button variant={'outline'} className="w-full" tabIndex={4} asChild>
+                <a href={route('google.login')} className="flex items-center justify-center">
+                    <GoogleAppLogoIcon className="mr-2 size-8 fill-current text-white" />
+                    Continue with Google
+                </a>
+            </Button>
+
+            <div className="text-center text-sm text-muted-foreground">
+                Already have an account?{' '}
+                <TextLink href={route('login')} tabIndex={6}>
+                    Log in
+                </TextLink>
+            </div>
         </AuthLayout>
     );
 }

@@ -62,7 +62,7 @@ class Post extends Model implements HasMedia
 
         $this
             ->addMediaConversion('preview')
-            ->fit(Fit::Stretch, 500, 700)
+            ->fit(Fit::Stretch, 400, 600)
             ->performOnCollections('dxf-images')
             ->nonQueued();
 
