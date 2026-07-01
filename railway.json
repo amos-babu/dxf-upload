@@ -1,0 +1,9 @@
+{
+  "$schema": "https://railway.com/railway.schema.json",
+  "deploy": {
+    "variables": {
+      "RAILPACK_PHP_VERSION": "8.4",
+      "RAILPACK_PHP_EXTENSIONS": "exif"
+    }
+  }
+}
