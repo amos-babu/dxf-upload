@@ -24,3 +24,7 @@ yarn-error.log
 /.zed
 composer.json
 vite.config.ts
+
+**/caddy
+frankenphp
+frankenphp-worker.php
