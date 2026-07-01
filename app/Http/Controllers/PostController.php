@@ -60,13 +60,13 @@ class PostController extends Controller
         if ($request->hasFile('dxf_file')) {
             $post->addMediaFromRequest('dxf_file')
                 ->usingName($post->name)
-                ->toMediaCollection('dxf-files', 'private');
+                ->toMediaCollection('dxf-files', 's3-private');
         }
 
         if ($request->hasFile('image')) {
             $post->addMediaFromRequest('image')
                 ->usingName($post->name)
-                ->toMediaCollection('dxf-images');
+                ->toMediaCollection('dxf-images', 's3-public');
         }
 
         return to_route('posts.index')->with('success', 'Uploaded successfully');
@@ -93,7 +93,7 @@ class PostController extends Controller
 
     public function imageDownload(Post $post)
     {
-        $path = Storage::disk('public')->path($post->image);
+        $path = Storage::disk('s3-public')->path($post->image);
 
         if (! file_exists($path)) {
             abort(404, 'File not found.');
@@ -104,7 +104,7 @@ class PostController extends Controller
 
     public function dxfDownload(Post $post)
     {
-        $path = Storage::disk('private')->path($post->dxf_file);
+        $path = Storage::disk('s3-private')->path($post->dxf_file);
 
         if (! file_exists($path)) {
             abort(404, 'File not found.');
@@ -147,12 +147,12 @@ class PostController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $filePath = $request->file('image')->store('images', 'public');
+            $filePath = $request->file('image')->store('images', 's3-public');
             $data['image'] = $filePath;
         }
 
         if ($request->hasFile('dxf_file')) {
-            $filePath = $request->file('dxf_file')->store('dxf_files', 'public');
+            $filePath = $request->file('dxf_file')->store('dxf_files', 's3-private');
             $data['dxf_file'] = $filePath;
         }
 

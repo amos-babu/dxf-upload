@@ -21,7 +21,5 @@ class PostResource extends JsonResource
             'image' => $this->getFirstMediaUrl('dxf-images', 'thumb'),
             'dxf_file' => $this->getFirstMediaUrl('dxf-files'),
         ];
-        // 'image' => url(Storage::url($this->image)),
-        // 'dxfFile' => url(Storage::url($this->dxf_file)),
     }
 }

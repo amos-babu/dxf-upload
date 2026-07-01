@@ -17,14 +17,14 @@ class FileUploadController extends Controller
         $data['user_id'] = Auth::id();
 
         if ($request->hasFile('image')) {
-            $filePath = $request->file('image')->store('images', 'public');
+            $filePath = $request->file('image')->store('dxf-images', 's3-public');
             $data['image'] = $filePath;
         }
 
         if ($request->hasFile('dxf_file')) {
             $dxfFile = $request->file('dxf_file');
             $dxfFileName = time().'.dxf';
-            $filePath = $dxfFile->storeAs('dxf_files', $dxfFileName, 'private');
+            $filePath = $dxfFile->storeAs('dxf_files', $dxfFileName, 's3-private');
             $data['dxf_file'] = $filePath;
         }
 

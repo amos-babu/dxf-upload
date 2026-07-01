@@ -45,11 +45,11 @@ class Post extends Model implements HasMedia
     {
         $this
             ->addMediaCollection('dxf-images')
-            ->useDisk('public');
+            ->useDisk('s3-public');
 
         $this
             ->addMediaCollection('dxf-files')
-            ->useDisk('private');
+            ->useDisk('s3-private');
     }
 
     public function registerMediaConversions(?Media $media = null): void
