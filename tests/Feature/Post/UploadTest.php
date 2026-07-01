@@ -16,8 +16,8 @@ test('files url displays', function () {
 
 test('authenticated user can upload files', function () {
 
-    Storage::fake('public');
-    Storage::fake('private');
+    Storage::fake('s3-public');
+    Storage::fake('s3-private');
 
     $user = User::factory()->create();
     $this->actingAs($user);
@@ -39,7 +39,7 @@ test('authenticated user can upload files', function () {
 
     $this->assertDatabaseHas('posts', ['name' => 'Test Design']);
 
-    // Storage::disk('private')->assertExists(
+    // Storage::disk('s3-private')->assertExists(
     //     $post->getFirstMediaPath('dxf-files')
     // );
 });
