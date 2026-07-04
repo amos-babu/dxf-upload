@@ -22,6 +22,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+         if ($this->app->environment('production') || $this->app->environment('staging')) {
+            URL::forceScheme('https');
+        }
+        
         RateLimiter::for('favorites', function (Request $request) {
             return Limit::perMinute(10)
                 ->by(optional($request->user())->id ?? $request->ip())
