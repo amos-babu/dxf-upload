@@ -10,7 +10,6 @@ import {
 } from './ui/pagination';
 
 export function PaginationLinks({ links, meta }: { links: LinksProps; meta: MetaProps }) {
-    console.log(links);
     return (
         <Pagination>
             <PaginationContent>
